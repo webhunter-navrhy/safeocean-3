@@ -10,6 +10,8 @@ noindex a robots.txt podle site.navrh, JSON-LD LocalBusiness ze site.json, og:im
 """
 import datetime
 import glob
+import base64
+import io
 import hashlib
 import html
 import json
@@ -24,7 +26,8 @@ from PIL import Image, ImageOps
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 SRC, DATA, IMG, STATIC, DIST, CACHE = (os.path.join(ROOT, p) for p in ("src", "_data", "img", "static", "dist", ".cache/img"))
-SIRKY = (640, 1280, 1920)
+SIRKY = (480, 800, 1200, 1800)
+KVALITA = 72
 RASTER = (".jpg", ".jpeg", ".png", ".webp")
 
 
@@ -77,16 +80,24 @@ class Obrazky:
         varianty = []
         for w in sirky:
             vyska = round(h0 * w / w0)
-            cache = os.path.join(CACHE, f"{h}-{w}.webp")
+            cache = os.path.join(CACHE, f"{h}-{w}-q{KVALITA}.webp")
             if not os.path.exists(cache):
                 r = im.resize((w, vyska), Image.LANCZOS) if w != w0 else im
                 if r.mode not in ("RGB", "RGBA"):
                     r = r.convert("RGBA" if "A" in r.getbands() else "RGB")
-                r.save(cache, "WEBP", quality=80, method=6)
+                r.save(cache, "WEBP", quality=KVALITA, method=6)
             out = f"{stem}-{w}.webp"
             shutil.copy(cache, os.path.join(cil_dir, out))
             varianty.append((w, vyska, f"img/{out}"))
-        self.info[nazev] = {"raster": True, "varianty": varianty}
+        # rozmazaný náhled (LQIP) – ukáže se hned, než dorazí fotka
+        t = im.copy()
+        if t.mode not in ("RGB", "RGBA"):
+            t = t.convert("RGBA" if "A" in t.getbands() else "RGB")
+        t.thumbnail((24, 24))
+        b = io.BytesIO()
+        t.save(b, "WEBP", quality=40)
+        lq = "data:image/webp;base64," + base64.b64encode(b.getvalue()).decode()
+        self.info[nazev] = {"raster": True, "varianty": varianty, "lq": lq}
         return self.info[nazev]
 
     def img(self, nazev, alt=None, sizes="100vw", cls="", eager=None, styl=""):
@@ -97,12 +108,13 @@ class Obrazky:
         i = self._zpracuj(nazev)
         a = f' alt="{html.escape(alt, quote=True)}"'
         c = f' class="{cls}"' if cls else ""
-        s = f' style="{styl}"' if styl else ""
         if not i["raster"]:
+            s = f' style="{styl}"' if styl else ""
             return Markup(f'<img src="{self.base}{i["src"]}"{a}{c}{s} loading="{"eager" if prvni else "lazy"}" decoding="async">')
         w, h, nejv = i["varianty"][-1][0], i["varianty"][-1][1], i["varianty"][-1][2]
         srcset = ", ".join(f"{self.base}{p} {w_}w" for w_, _, p in i["varianty"])
         nacitani = 'loading="eager" fetchpriority="high"' if prvni else 'loading="lazy"'
+        s = f' style="background:url({i["lq"]}) center/cover no-repeat;{styl}" data-lq'
         return Markup(f'<img src="{self.base}{nejv}" srcset="{srcset}" sizes="{sizes}" width="{w}" height="{h}"{a}{c}{s} '
                       f'{nacitani} decoding="async">')
 

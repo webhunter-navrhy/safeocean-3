@@ -44,3 +44,16 @@ Kalkulačka objemu zůstává jen na stránce Akvária na míru jako nástroj, n
 ## Porovnání
 - Předchozí web v registru: spotlight (kino, černá + zlatá) – jiná skladba i písmo.
 - Odmítnuté: Vizitkomat v1 (béžový editorial u e-shopu) – tady chladná světlá paleta z brandu a e-shopová struktura; Pletánky v1 (moc efektů) – tady žádné.
+
+## Kolo 3 (7. 11. 2026) – „mnohem lepší“, e-shop víc do brandu
+Tři koncepty:
+1. **Světlo z akvária** – stránka je setmělý interiér v modři z loga, jediným zdrojem světla jsou akvária: fotky a video svítí, jejich modrá záře se rozlévá na stránku, nad každou fotkou je světelná lišta v přechodu z loga (bílá → elektrická modř) jako LED rampa nad nádrží.
+2. Hloubkoměr – boční měřítko hloubky jako navigace, stránka tmavne směrem dolů. Zamítnuto: gimik (v1 „Den akvária“ Rafael odmítl).
+3. Technický řez – výkresy nádrží s kótami. Zamítnuto: jejich síla jsou fotky a video, ne výkresy.
+
+Výběr: 1 – pravdivé k jejich fotkám (osvětlené nádrže v tmavých interiérech), drží brand (logo = bílá → modrá, starý web tmavě modrý + zlaté menu), nepotřebuje hračky.
+Signature: (a) úvodní video se při posunu „vzdálí“ do nádrže se světelnou lištou (CSS scroll-driven, bez pinningu); (b) záře – každá fotka vrhá modré světlo na stránku.
+Písmo: Host Grotesk (font jejich starého webu i loga) + Fragment Mono pro drobné popisky (taky ze starého webu). Zlatá #E6C463 z menu starého webu jen na čísla a odkazy.
+Skladba úvodu: video hero → manifest velkým písmem → tři druhy (mořské / sladkovodní / terária) jako vysoké svítící nádrže → projekty (01)–(05) asymetricky velké → jak to probíhá → servis přes celou šířku s Václavem → architekti → FAQ → kontakt.
+E-shop: tmavě modrá hlavička, lišta světů a mega menu, úvod e-shopu jako tmavý pás se zářícími světy; produkty na světlém (klid, čitelnost), ale modrá tlačítka, modře tónované plochy fotek, zlaté štítky výprodeje, stejná tmavá patička.
+Zakázané vzory: číslování (01)–(05) jen u projektů (je z jejich starého webu), indikátor scrollu v hero zrušen.

@@ -1024,3 +1024,304 @@ body.tmavy {
 .tmavy--uvod .mobmenu { height: calc(100dvh - 68px); max-height: none; }
 .drobky { align-items: center; } .drobky > span { display: inline-flex; align-items: center; min-height: 40px; }
 @media (min-width: 761px) { .drobky > span { min-height: 0; } }
+
+/* ══ 7. 11. kolo 3: „Světlo z akvária“ – fotky svítí do tmy, lišta v přechodu z loga ══ */
+:root { --mono: 'Fragment Mono', ui-monospace, monospace; --logo-grad: linear-gradient(90deg, rgba(255,255,255,0) 0%, #fff 18%, #9aa6ff 48%, #1538ff 78%, rgba(21,56,255,0) 100%); --zare: 0 40px 110px -36px rgba(40,56,255,.75), 0 0 0 1px rgba(255,255,255,.06); }
+body.tmavy { --zlata: #E6C463; --modra-svetla: #A9A3FF; }
+.tmavy h1, .tmavy h2 { color: #fff; }
+.tmavy main h2 { font-size: clamp(2.3rem, 4.6vw, 4.3rem); line-height: 1; letter-spacing: -0.045em; }
+.stitek, .tmavy .nadtitul, .tmavy .servis-pas .nadtitul {
+  font-family: var(--mono); font-size: .76rem; letter-spacing: .06em; text-transform: uppercase; color: rgba(255,255,255,.72);
+  display: inline-flex; align-items: center; gap: .7em; margin-bottom: 1.4rem;
+}
+.stitek::before, .tmavy .nadtitul::before { content: ""; width: 22px; height: 2px; background: linear-gradient(90deg, #fff, #1538ff); flex: none; }
+.tmavy .sipka { color: #fff; border-bottom-color: rgba(255,255,255,.3); }
+
+/* nádrž: fotka jako osvětlené akvárium – LED lišta nahoře a záře pod ní */
+.nadrz { position: relative; display: block; box-shadow: var(--zare); isolation: isolate; }
+.nadrz::before { content: ""; position: absolute; z-index: 2; left: 0; right: 0; top: 0; height: 2px; background: var(--logo-grad); pointer-events: none; }
+.nadrz::after { content: ""; position: absolute; z-index: 1; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(160,170,255,.16), rgba(160,170,255,0) 22%); mix-blend-mode: screen; }
+.nadrz img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+/* hero: video se při posunu vzdálí do nádrže */
+.hero { background: var(--tma); }
+.hero__okno { position: absolute; inset: 0; z-index: -2; overflow: hidden; }
+.hero__okno .hero__video { z-index: 0; }
+.hero::after { background:
+    linear-gradient(180deg, rgba(7,3,39,.6) 0%, rgba(7,3,39,0) 20%),
+    linear-gradient(0deg, rgba(7,3,39,.95) 0%, rgba(7,3,39,.5) 34%, rgba(7,3,39,0) 64%),
+    linear-gradient(90deg, rgba(7,3,39,.5) 0%, rgba(7,3,39,0) 50%); }
+.hero h1 { font-size: clamp(3.6rem, 10.5vw, 10.5rem); line-height: .88; letter-spacing: -0.06em; margin-bottom: 1.6rem; }
+.hero .stitek { color: rgba(255,255,255,.85); }
+.hero__projekt { justify-items: end; gap: 2px; }
+.hero__projekt small { font-family: var(--mono); font-size: .72rem; letter-spacing: .05em; text-transform: uppercase; color: rgba(255,255,255,.6); }
+.hero__projekt span { text-transform: none; font-size: clamp(1.2rem, 1.7vw, 1.5rem); letter-spacing: -0.02em; }
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) and (min-width: 900px) {
+    .hero__okno { animation: oddalit linear both; animation-timeline: scroll(root); animation-range: 0 85vh; }
+    .hero__in { animation: hero-text linear both; animation-timeline: scroll(root); animation-range: 0 70vh; }
+    @keyframes oddalit { to { clip-path: inset(7vh 3.5vw 0 3.5vw round 4px); } }
+    @keyframes hero-text { to { transform: translateY(-8vh); opacity: .15; } }
+  }
+}
+
+/* manifest */
+.manifest { padding-block: clamp(6rem, 13vw, 11rem) clamp(4rem, 8vw, 7rem); position: relative; }
+.manifest::before { content: ""; position: absolute; inset: 0 0 auto; height: 60%; background: radial-gradient(50% 70% at 50% 0%, rgba(40,56,255,.22), rgba(40,56,255,0) 70%); pointer-events: none; }
+.manifest .wrap { position: relative; }
+.manifest__text { font-size: clamp(1.9rem, 4.1vw, 3.9rem); line-height: 1.08; letter-spacing: -0.04em; max-width: 22ch; margin-bottom: clamp(3.5rem, 7vw, 6rem); }
+.manifest__text span { color: rgba(255,255,255,.42); }
+.tmavy .manifest .vyhody { display: grid; grid-template-columns: 1fr 1fr; gap: 0 clamp(2rem, 4vw, 4rem); margin-left: auto; width: min(100%, 760px); border: 0; padding: 0; }
+.tmavy .manifest .vyhody li { display: grid; gap: 6px; padding: 22px 0; border-top: 1px solid var(--line); border-left: 0; }
+.tmavy .manifest .vyhody b { color: #fff; font-weight: 400; font-size: 1.25rem; letter-spacing: -0.02em; }
+.tmavy .manifest .vyhody span { color: var(--muted); font-size: .98rem; }
+
+/* tři druhy jako svítící nádrže */
+.druhy { padding-bottom: clamp(5rem, 10vw, 9rem); }
+.druhy__rada { display: grid; grid-template-columns: 1.15fr 1fr 1fr; gap: clamp(1rem, 2.2vw, 2rem); align-items: end; }
+.druh { display: grid; gap: 22px; text-decoration: none; color: #fff; }
+.druh__foto { aspect-ratio: 3 / 4; overflow: hidden; }
+.druh:first-child .druh__foto { aspect-ratio: 4 / 5; }
+.druh__foto img { transition: transform .8s cubic-bezier(.2,.7,.2,1); }
+.druh:hover .druh__foto img { transform: scale(1.04); }
+.druh__t { display: grid; gap: 8px; }
+.druh__t b { font-weight: 400; font-size: clamp(1.4rem, 2vw, 1.85rem); letter-spacing: -0.03em; display: flex; justify-content: space-between; gap: 1rem; }
+.druh__t b::after { content: "→"; color: var(--zlata); transition: transform .2s; }
+.druh:hover .druh__t b::after { transform: translateX(4px); }
+.druh__t span { color: var(--muted); max-width: 36ch; }
+
+/* projekty – asymetrie */
+.projekty__hlava { display: flex; justify-content: space-between; align-items: end; gap: 2rem; margin-bottom: clamp(2.5rem, 5vw, 4.5rem); }
+.projekty__hlava h2 { font-size: clamp(3.4rem, 9vw, 8.5rem); line-height: .9; letter-spacing: -0.06em; }
+.projekty__mrizka { grid-template-columns: repeat(12, minmax(0, 1fr)); gap: clamp(3rem, 6vw, 5.5rem) clamp(1rem, 2.4vw, 2.2rem); align-items: start; }
+.projekt--1 { grid-column: 1 / span 7; }
+.projekt--2 { grid-column: 8 / span 5; margin-top: clamp(4rem, 12vw, 11rem); }
+.projekt--3 { grid-column: 1 / span 5; }
+.projekt--4 { grid-column: 6 / span 7; margin-top: clamp(3rem, 8vw, 7rem); }
+.projekt--5 { grid-column: 1 / -1; }
+.projekt__foto { background: var(--bg-2); }
+.projekt--2 .projekt__foto, .projekt--3 .projekt__foto { aspect-ratio: 4 / 5; }
+.projekt--5 .projekt__foto { aspect-ratio: 2.35; }
+.projekt__popis { border-bottom: 0; padding-bottom: 0; }
+.projekt__popis b { font-size: clamp(1.25rem, 1.8vw, 1.65rem); }
+.projekt__popis > span { font-family: var(--mono); font-size: .74rem; letter-spacing: .03em; text-transform: uppercase; }
+.projekt:nth-child(5) { grid-column: 1 / -1; }
+
+/* studio: text + pilíře + postup */
+.studio3 { position: relative; }
+.studio3__hlava { max-width: 900px; margin-bottom: clamp(3rem, 6vw, 5rem); }
+.studio3__hlava h2 { margin-bottom: 1.5rem; }
+.studio3__hlava p { font-size: clamp(1.08rem, 1.4vw, 1.3rem); color: var(--text); max-width: 56ch; }
+.pilire3 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 clamp(2rem, 5vw, 5rem); margin: 0 0 clamp(4rem, 8vw, 7rem); }
+.pilire3 div { padding: 26px 0; border-top: 1px solid var(--line); display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 1.5rem; }
+.pilire3 dt { color: #fff; font-size: 1.3rem; letter-spacing: -0.02em; }
+.pilire3 dd { margin: 0; color: var(--muted); }
+.postup3 { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: clamp(2rem, 5vw, 5rem); padding: clamp(2rem, 4vw, 3.5rem); background: linear-gradient(160deg, rgba(53,27,248,.2), rgba(53,27,248,.04) 60%), var(--bg-2); border: 1px solid var(--line); border-radius: 4px; position: relative; }
+.postup3::before { content: ""; position: absolute; left: 0; right: 0; top: -1px; height: 2px; background: var(--logo-grad); }
+.postup3__h { font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 400; color: #fff; letter-spacing: -0.04em; }
+.kroky3 { list-style: none; margin: 0; padding: 0; counter-reset: k; grid-row: span 2; }
+.kroky3 li { counter-increment: k; display: grid; grid-template-columns: 3rem minmax(0, 1fr) minmax(0, 1.4fr); gap: 1rem; padding: 18px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+.kroky3 li:first-child { padding-top: 0; }
+.kroky3 li::before { content: "0" counter(k); font-family: var(--mono); font-size: .8rem; color: var(--zlata); }
+.kroky3 b { color: #fff; font-weight: 400; font-size: 1.15rem; }
+.kroky3 span { color: var(--muted); font-size: .95rem; }
+.postup3 .uvod__akce { align-self: end; }
+
+/* servis přes celou šířku */
+.servis3 { position: relative; isolation: isolate; min-height: min(92vh, 900px); display: grid; align-items: end; overflow: hidden; }
+.servis3__foto { position: absolute; inset: 0; margin: 0; z-index: -2; }
+.servis3__foto img { width: 100%; height: 100%; object-fit: cover; object-position: 30% 40%; }
+.servis3::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(7,3,39,0) 30%, rgba(7,3,39,.85) 62%), linear-gradient(0deg, rgba(7,3,39,.8), rgba(7,3,39,0) 40%); }
+.servis3__in { display: flex; justify-content: flex-end; padding-block: clamp(4rem, 9vw, 8rem); }
+.servis3__panel { width: min(100%, 560px); }
+.servis3__panel h2 { margin-bottom: 1.4rem; }
+.servis3__panel p { color: rgba(255,255,255,.8); }
+.servis3 .servis-seznam li { grid-template-columns: 190px 1fr; color: rgba(255,255,255,.7); }
+
+/* architekti */
+.architekti3__in { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(2rem, 6vw, 6rem); align-items: center; }
+.architekti3__text h2 { margin-bottom: 1.4rem; }
+.architekti3__text p { color: var(--text); margin-bottom: 1rem; max-width: 46ch; }
+.architekti3__text .sipka { margin-top: 1rem; }
+.architekti3__foto { margin: 0; aspect-ratio: 3 / 2; overflow: hidden; }
+
+/* FAQ, kontakt */
+.faq3 { background: var(--bg-2); }
+.tmavy .faq summary { color: #fff; font-weight: 400; font-size: 1.15rem; }
+.tmavy .faq summary::after { border-color: var(--zlata); }
+.kontakt3 { position: relative; overflow: clip; }
+.kontakt3::before { content: ""; position: absolute; left: 50%; top: 0; width: 120%; height: 70%; transform: translateX(-50%); background: radial-gradient(45% 60% at 50% 0%, rgba(40,56,255,.28), rgba(40,56,255,0) 70%); pointer-events: none; }
+.kontakt3 .wrap { position: relative; }
+.kontakt3__h { font-size: clamp(2.8rem, 7.5vw, 7rem) !important; line-height: .92 !important; letter-spacing: -0.055em; max-width: 13ch; margin-bottom: clamp(3rem, 6vw, 5rem); }
+.kontakt3 .kontakt__udaje b { font-weight: 400; color: #fff; }
+.tmavy .formular { border: 1px solid var(--line); position: relative; }
+.tmavy .formular::before { content: ""; position: absolute; left: 0; right: 0; top: -1px; height: 2px; background: var(--logo-grad); }
+
+/* jemné vynoření fotek při posunu */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .nadrz img { animation: vynorit linear both; animation-timeline: view(); animation-range: entry 0% entry 80%; }
+    @keyframes vynorit { from { transform: scale(1.08); filter: brightness(.55) saturate(.7); } to { transform: none; filter: none; } }
+  }
+}
+
+@media (max-width: 899px) {
+  .druhy__rada { grid-template-columns: 1fr; gap: 3rem; }
+  .druh .druh__foto, .druh:first-child .druh__foto { aspect-ratio: 4 / 3; }
+  .projekty__mrizka { grid-template-columns: 1fr; }
+  .projekt--1, .projekt--2, .projekt--3, .projekt--4, .projekt--5 { grid-column: 1 / -1; margin-top: 0; }
+  .projekt--2 .projekt__foto, .projekt--3 .projekt__foto, .projekt--5 .projekt__foto { aspect-ratio: 4 / 3; }
+  .pilire3 { grid-template-columns: 1fr; }
+  .pilire3 div { grid-template-columns: 1fr; gap: 6px; padding: 20px 0; }
+  .postup3 { grid-template-columns: 1fr; padding: 1.5rem; }
+  .kroky3 li { grid-template-columns: 2.4rem minmax(0, 1fr); }
+  .kroky3 span { grid-column: 2; }
+  .servis3 { min-height: 0; display: block; }
+  .servis3__foto { position: relative; aspect-ratio: 4 / 3; }
+  .servis3::after { background: linear-gradient(0deg, var(--tma) 0%, rgba(7,3,39,.6) 30%, rgba(7,3,39,0) 55%); }
+  .servis3__in { padding-top: 0; margin-top: -3rem; }
+  .servis3 .servis-seznam li { grid-template-columns: 1fr; gap: 2px; }
+  .architekti3__in { grid-template-columns: 1fr; }
+  .architekti3__foto { order: -1; }
+  .tmavy .manifest .vyhody { grid-template-columns: 1fr; }
+}
+
+.projekt__popis { grid-template-columns: 3.4rem minmax(0, 1fr); row-gap: 4px; }
+.projekt__popis > span { grid-column: 2; white-space: normal; }
+/* podstránky studia: větší titulky, fotky svítí jako nádrže */
+.tmavy .podtma h1 { font-size: clamp(3.2rem, 8vw, 7.5rem); line-height: .9; letter-spacing: -0.055em; }
+.tmavy main figure:not(.servis-pas__foto):not(.servis3__foto):not(.pas-foto):not(.nadrz):not(.kalk__nakres),
+.tmavy .real__foto, .tmavy .r-polozka__foto { position: relative; box-shadow: var(--zare); }
+.tmavy main figure:not(.servis-pas__foto):not(.servis3__foto):not(.pas-foto):not(.nadrz):not(.kalk__nakres)::before,
+.tmavy .real__foto::before, .tmavy .r-polozka__foto::before { content: ""; position: absolute; z-index: 2; left: 0; right: 0; top: 0; height: 2px; background: var(--logo-grad); pointer-events: none; }
+.tmavy .karta figure, .tmavy .karta .karta__foto { box-shadow: none; }
+.tmavy .karta figure::before { content: none; }
+.tmavy .typ h3, .tmavy .umisteni h3 { color: #fff; font-weight: 400; font-size: 1.35rem; letter-spacing: -0.02em; }
+
+/* ══ 7. 11. kolo 3: e-shop v brandu – tmavá z loga nahoře, světélkující nádrže, světlý obchod pod tím ══ */
+body.eshop { --zlata: #E6C463; --tma-2: #0E0B38; --pozadi-eshop: #F3F4F9; background: var(--pozadi-eshop); }
+body.eshop main { background: var(--pozadi-eshop); }
+.eshop .sekce:not(.sekce--seda) { background: var(--pozadi-eshop); }
+.eshop .sekce--seda { background: #fff; }
+
+/* hlavička: lišta + hledání + světy jako jeden tmavý pás */
+.eshop .lista { border-bottom: 1px solid rgba(255,255,255,.08); }
+.eshop .hlavicka, .eshop .hlavicka.je-plna { background: var(--tma); border-bottom: 0; color: #fff; backdrop-filter: none; }
+.eshop .hlavicka::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--logo-grad); opacity: .55; pointer-events: none; }
+.eshop .hledat svg { color: rgba(255,255,255,.55); }
+.eshop .hledat input { background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.14); color: #fff; }
+.eshop .hledat input::placeholder { color: rgba(255,255,255,.5); }
+.eshop .hledat input:focus { background: rgba(255,255,255,.11); border-color: #7C72FF; box-shadow: 0 0 0 3px rgba(53,27,248,.35); }
+.eshop .kosik-odkaz { color: #fff; }
+.eshop .burger span:not(.sr) { background: #fff; }
+.eshop .svety-nav { border-top-color: rgba(255,255,255,.1); }
+.eshop .sn__a { color: rgba(255,255,255,.92); }
+.eshop .sn__a svg { color: rgba(255,255,255,.45); }
+.eshop .sn__a:hover { color: #fff; }
+.eshop .sn--vedlejsi .sn__a { color: rgba(255,255,255,.7); }
+.eshop .sn--vedlejsi .sn__a:hover { color: #fff; }
+.eshop .sn__a[aria-current]::after, .eshop .sn:hover > .sn__a::after { background: linear-gradient(90deg, #fff, #1538ff); height: 2px; bottom: 0; }
+.eshop .sn__a.sn__a--vyprodej { color: var(--zlata); }
+.eshop .sn__panel { background: var(--tma-2); border-top-color: rgba(255,255,255,.1); box-shadow: 0 40px 70px -30px rgba(7,3,39,.7); }
+.eshop .sn__kat a { color: rgba(255,255,255,.78); border-bottom-color: rgba(255,255,255,.1); }
+.eshop .sn__kat a span { color: rgba(255,255,255,.42); }
+.eshop .sn__kat a:hover { color: #fff; border-color: #6E66FF; }
+.eshop .sn__foto { box-shadow: var(--zare); }
+.eshop .sn__foto::before { content: ""; position: absolute; z-index: 2; left: 0; right: 0; top: 0; height: 2px; background: var(--logo-grad); }
+
+/* mobilní menu */
+.eshop .mobmenu { background: var(--tma); border-top-color: rgba(255,255,255,.1); }
+.eshop .mm > li { border-bottom-color: rgba(255,255,255,.1); }
+.eshop .mm__svet summary, .eshop .mm__a { color: #fff; }
+.eshop .mm__svet summary svg { color: rgba(255,255,255,.5); }
+.eshop .mm__svet[open] summary { color: #A9A3FF; }
+.eshop .mm__a.mm__a--vyprodej { color: var(--zlata); }
+.eshop .mm__kat { border-left-color: rgba(255,255,255,.18); }
+.eshop .mm__kat a { color: rgba(255,255,255,.72); }
+.eshop .mm__kat a b { color: #fff; }
+.eshop .mm__kat a span, .eshop .mm__male a { color: rgba(255,255,255,.5); }
+
+/* úvod e-shopu: tmavý pás navazuje na hlavičku, světy jako osvětlené nádrže */
+.eshop-uvod { position: relative; color: rgba(255,255,255,.74); padding-top: clamp(2.5rem, 5vw, 4.5rem); padding-bottom: clamp(3rem, 6vw, 5rem);
+  background: radial-gradient(60% 70% at 78% 0%, rgba(53,27,248,.38), rgba(53,27,248,0) 70%), radial-gradient(40% 50% at 8% 100%, rgba(21,56,255,.18), rgba(21,56,255,0) 70%), var(--tma); }
+.eshop-uvod h1 { color: #fff; font-size: clamp(2.8rem, 6.4vw, 6rem); line-height: .98; letter-spacing: -0.05em; max-width: 14ch; }
+.eshop-uvod__hlava { margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+.eshop-uvod__hlava p.perex { color: rgba(255,255,255,.72); }
+.svety { gap: clamp(14px, 1.6vw, 24px); }
+.svet-karta { position: relative; background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.025)); border-radius: 3px; box-shadow: 0 0 0 1px rgba(255,255,255,.08); overflow: visible; transition: box-shadow .35s ease, transform .35s ease; }
+.svet-karta__foto { position: relative; border-radius: 3px 3px 0 0; box-shadow: 0 30px 70px -34px rgba(40,56,255,.85); isolation: isolate; }
+.svet-karta__foto::before { content: ""; position: absolute; z-index: 2; left: 0; right: 0; top: 0; height: 2px; background: var(--logo-grad); }
+.svet-karta__foto::after { content: ""; position: absolute; z-index: 1; inset: 0; background: linear-gradient(180deg, rgba(160,170,255,.16), rgba(160,170,255,0) 25%, rgba(7,3,39,0) 70%, rgba(7,3,39,.35)); mix-blend-mode: screen; pointer-events: none; }
+.svet-karta:hover { box-shadow: 0 0 0 1px rgba(150,150,255,.28), 0 40px 90px -40px rgba(40,56,255,.9); transform: translateY(-3px); }
+.svet-karta h2 { color: #fff; font-size: clamp(1.4rem, 1.8vw, 1.75rem); letter-spacing: -0.03em; }
+.svet-karta h2 a:hover { color: #fff; }
+.svet-karta li a { color: rgba(255,255,255,.66); border-bottom: 1px solid rgba(255,255,255,.07); padding: 7px 0; }
+.svet-karta li:last-child a { border-bottom: 0; }
+.svet-karta li a:hover { color: #fff; }
+.svet-karta .sipka { color: var(--zlata); border-bottom-color: rgba(230,196,99,.4); }
+.svet-karta .sipka:hover { border-color: var(--zlata); }
+.vyhody--eshop { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 clamp(2rem, 5vw, 5rem); border: 0; margin-top: clamp(2.5rem, 5vw, 4rem); max-width: 980px; margin-left: auto; }
+.vyhody--eshop li, .vyhody--eshop li + li { padding: 18px 0; border-left: 0; border-top: 1px solid rgba(255,255,255,.12); }
+.vyhody--eshop b { color: #fff; font-size: 1.05rem; }
+.vyhody--eshop span { color: rgba(255,255,255,.62); }
+
+/* hlavičky světů a kategorií: tmavý panel přes celou šířku */
+.eshop .drobky:has(+ .svet-hlava), .eshop .drobky:has(+ .podhlava),
+.eshop .svet-hlava, .eshop .podhlava { border-image: conic-gradient(var(--tma) 0 0) fill 0 / / 0 100vmax; }
+.eshop .drobky:has(+ .svet-hlava), .eshop .drobky:has(+ .podhlava) { margin-top: 0; padding-top: 22px; }
+.eshop .drobky:has(+ .svet-hlava) a, .eshop .drobky:has(+ .podhlava) a, .eshop .drobky:has(+ .svet-hlava), .eshop .drobky:has(+ .podhlava) { color: rgba(255,255,255,.6); }
+.eshop .drobky:has(+ .svet-hlava) a:hover, .eshop .drobky:has(+ .podhlava) a:hover { color: #fff; }
+.eshop .drobky:has(+ .svet-hlava) span[aria-hidden], .eshop .drobky:has(+ .podhlava) span[aria-hidden] { color: rgba(255,255,255,.28); }
+.eshop .svet-hlava, .eshop .podhlava { color: rgba(255,255,255,.72); margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+.eshop .svet-hlava { padding-bottom: clamp(3rem, 6vw, 5rem); }
+.eshop .svet-hlava h1, .eshop .podhlava h1 { color: #fff; letter-spacing: -0.05em; }
+.eshop .svet-hlava h1 { font-size: clamp(2.8rem, 6vw, 5.6rem); line-height: .98; }
+.eshop .svet-hlava__text p, .eshop .podhlava p { color: rgba(255,255,255,.7); }
+.eshop .svet-hlava__text .svet-hlava__pocet { color: var(--zlata); font-family: var(--mono); font-size: .8rem; letter-spacing: .06em; text-transform: uppercase; font-weight: 400; }
+.eshop .svet-hlava__foto { position: relative; border-radius: 3px; overflow: visible; box-shadow: var(--zare); background: var(--tma-2); }
+.eshop .svet-hlava__foto img { border-radius: 3px; }
+.eshop .svet-hlava__foto::before { content: ""; position: absolute; z-index: 2; left: 0; right: 0; top: 0; height: 2px; background: var(--logo-grad); }
+
+/* sekce světa */
+.eshop .podsekce__a { border-color: transparent; box-shadow: 0 1px 2px rgba(12,10,46,.05); }
+.eshop .podsekce__a:hover { border-color: #C9C4FF; box-shadow: 0 18px 40px -26px rgba(53,27,248,.45); }
+
+/* karty produktů: bílé na studeném podkladu, modré tlačítko, zlatá sleva */
+.eshop .karta { background: #fff; border-radius: 3px; overflow: hidden; box-shadow: 0 1px 2px rgba(12,10,46,.05); transition: box-shadow .25s ease, transform .25s ease; }
+.eshop .karta:hover { box-shadow: 0 0 0 1px #D9D5FF, 0 24px 48px -28px rgba(53,27,248,.45); transform: translateY(-2px); }
+.eshop .karta__foto { border-radius: 0; background: #fff; }
+.eshop .karta__telo { padding: 14px 16px 16px; }
+.eshop .karta__pridat { background: var(--blue); border-color: var(--blue); color: #fff; }
+.eshop .karta__pridat:hover { background: var(--tma); border-color: var(--tma); }
+.eshop .karta__pridat.je-ok { background: var(--zelena); border-color: var(--zelena); }
+.eshop .tag--akce { background: var(--zlata); border-color: var(--zlata); color: var(--tma); font-weight: 600; }
+.eshop .cena--akce { color: var(--blue); }
+.eshop .zalozky button { border-color: #DCDDE7; }
+.eshop .zalozky button[aria-selected="true"] { background: var(--blue); border-color: var(--blue); color: #fff; }
+.eshop .filtry__podkat button[aria-pressed="true"] { background: var(--blue); border-color: var(--blue); }
+.eshop .ukazka-pozn { background: #fff; }
+.eshop .karta-udaje { background: #fff; }
+.eshop .sekce-hlava h2 { letter-spacing: -0.04em; }
+.eshop .na-miru-pas figure { position: relative; overflow: visible; box-shadow: var(--zare); border-radius: 3px; }
+.eshop .na-miru-pas figure img { border-radius: 3px; }
+.eshop .na-miru-pas figure::before { content: ""; position: absolute; z-index: 2; left: 0; right: 0; top: 0; height: 2px; background: var(--logo-grad); }
+
+@media (max-width: 899px) {
+  .eshop-uvod h1 { font-size: clamp(2.5rem, 11vw, 3.4rem); }
+  .vyhody--eshop { grid-template-columns: 1fr; margin-left: 0; }
+  .vyhody--eshop li, .vyhody--eshop li + li { padding: 14px 0; }
+  .eshop .svet-hlava h1 { font-size: clamp(2.4rem, 10vw, 3.2rem); }
+}
+@media (max-width: 639px) {
+  .svet-karta { grid-template-columns: 38% minmax(0, 1fr); }
+  .svet-karta__foto { border-radius: 3px 0 0 3px; }
+  .eshop .karta__telo { padding: 12px 12px 14px; }
+}
+.eshop-uvod .vyhody--eshop li:nth-child(n) { padding: 18px 0; border-left: 0; border-top: 1px solid rgba(255,255,255,.12); }
+@media (max-width: 899px) { .eshop-uvod .vyhody--eshop li:nth-child(n) { padding: 14px 0; } }
+.eshop .galerie__hlavni { background: #fff; box-shadow: 0 1px 2px rgba(12,10,46,.05); }
+@media (max-width: 639px) {
+  .eshop .karta__pata { gap: 6px; }
+  .eshop .cena--akce s { display: block; margin-left: 0; line-height: 1.2; }
+  .eshop .karta__pridat { width: 40px; height: 40px; }
+}

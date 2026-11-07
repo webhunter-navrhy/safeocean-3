@@ -7,7 +7,8 @@
 <section class="eshop-uvod">
   <div class="wrap">
     <div class="eshop-uvod__hlava">
-      <h1>{{ "E-shop pro akvaristy a teraristy"|cz }}</h1>
+      <div><p class="stitek">E-shop Safe Ocean · Praha&nbsp;3</p>
+      <h1>{{ "E-shop pro akvaristy a teraristy"|cz }}</h1></div>
       <p class="perex">{{ "Vybíráme to, co sami používáme u akvárií a terárií našich klientů. Živé zboží si můžete prohlédnout a vyzvednout osobně v Praze 3."|cz }}</p>
     </div>
     <div class="svety">
@@ -17,21 +18,19 @@
         <div class="svet-karta__telo">
           <h2><a href="{{ url('eshop/' ~ s.slug) }}">{{ s.nazev }}</a></h2>
           <ul>{% for k in s.kategorie[:5] %}<li><a href="{{ url('eshop/' ~ s.slug ~ '/' ~ k.slug) }}">{{ k.kratce or k.nazev }}</a></li>{% endfor %}</ul>
-          <a class="sipka" href="{{ url('eshop/' ~ s.slug) }}">{% if s.kategorie|length > 5 %}{{ "a dalších " ~ (s.kategorie|length - 5) ~ " sekcí" }}{% else %}{{ polozek(s.produkty|length) }}{% endif %}</a>
+          <a class="sipka" href="{{ url('eshop/' ~ s.slug) }}">{% if s.kategorie|length > 5 %}{% set zb = s.kategorie|length - 5 %}{% if zb == 1 %}a ještě 1 sekce{% elif zb <= 4 %}a další {{ zb }} sekce{% else %}a dalších {{ zb }} sekcí{% endif %}{% else %}{{ polozek(s.produkty|length) }}{% endif %}</a>
         </div>
       </article>
       {% endfor %}
     </div>
-  </div>
-</section>
-<div class="wrap">
-  <ul class="vyhody">
+    <ul class="vyhody vyhody--eshop">
     <li><b>Osobní odběr v&nbsp;Praze&nbsp;3</b><span>{{ "Živé a mražené zboží osobně nebo rozvozem po Praze."|cz }}</span></li>
     <li><b>Suché zboží po celé ČR</b><span>{{ "Zásilkovna nebo PPL do 2 pracovních dnů."|cz }}</span></li>
     <li><b>Poradíme s výběrem</b><span>{{ "Jestli se druh hodí k vašim obyvatelům i k vaší vodě."|cz }}</span></li>
     <li><b>Instalace a servis</b><span>{{ "Techniku vám zapojíme, akvárium i terárium postavíme na míru."|cz }}</span></li>
   </ul>
-</div>
+  </div>
+</section>
 
 {% if data.vyprodej %}
 <section class="sekce" aria-labelledby="vyp-h">

@@ -17,6 +17,13 @@
     else { rej.addEventListener('animationend', function (e) { if (e.target === rej) pryc(); }); setTimeout(pryc, 3200); }
   }
 
+  /* rozmazaný náhled fotky pryč, jakmile je fotka načtená (kvůli průhledným a „contain“ fotkám) */
+  var lqPryc = function (im) { im.style.backgroundImage = 'none'; im.removeAttribute('data-lq'); };
+  Array.prototype.forEach.call(d.querySelectorAll('img[data-lq]'), function (im) {
+    if (im.complete && im.naturalWidth) lqPryc(im);
+    else im.addEventListener('load', function () { lqPryc(im); }, { once: true });
+  });
+
   /* úvod s videem: hlavička plná po posunu, video jen když je vidět */
   var hlU = d.body.classList.contains('tmavy--uvod') ? $('[data-hlavicka]') : null;
   if (hlU) {
