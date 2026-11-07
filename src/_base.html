@@ -24,7 +24,7 @@
 {% block head %}{% endblock %}
 {% if jsonld %}<script type="application/ld+json">{{ jsonld|safe }}</script>{% endif %}
 </head>
-<body class="{% block telo %}{% endblock %}" data-base="{{ base }}">
+<body class="{% block telo %}tmavy{% endblock %}" data-base="{{ base }}">
 <a class="skip" href="#obsah">Přeskočit na obsah</a>
 {% block uvodni %}{% endblock %}
 {% block hlavicka %}
@@ -37,7 +37,7 @@
 <header class="hlavicka" data-hlavicka>
   <div class="wrap hlavicka__in">
     <a href="{{ url('') }}" class="znacka" aria-label="Safe Ocean – úvod">
-      <img src="{{ base }}img/logo-den.svg" alt="" width="24" height="37" class="znacka__mark">
+      <img src="{{ base }}img/logo-noc.svg" alt="" width="24" height="37" class="znacka__mark">
       <span class="znacka__text">Safe Ocean</span>
     </a>
     <nav class="menu" aria-label="Hlavní">

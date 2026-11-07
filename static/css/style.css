@@ -903,3 +903,124 @@ ul { margin: 0; padding: 0; list-style: none; }
 
 .mobmenu__kontakt { line-height: 1.4; }
 .mobmenu__kontakt a { display: inline-flex; align-items: center; min-height: 42px; }
+
+/* ══ 7. 11. kolo 2: studio v duchu původního webu – tmavá modř z loga, zlaté menu, video, číslované projekty ══ */
+.skip { background: #0C0A2E; }
+.toast { background: #15113F; }
+body.tmavy {
+  --bg: #070327; --bg-2: #0D0938; --bg-3: #16114A;
+  --ink: #FFFFFF; --text: #C9C8DE; --muted: #9B9AB9;
+  --line: rgba(255,255,255,.12); --line-2: rgba(255,255,255,.24);
+  --blue-tint: rgba(83,64,255,.22); --zlata: #E6C463;
+  background: var(--bg); color: var(--text);
+}
+.tmavy .nadtitul, .tmavy .servis-pas .nadtitul { color: var(--zlata); }
+.tmavy .kroky li::before { color: var(--zlata); }
+.tmavy .tl:not(.tl--plne):hover { color: var(--tma); }
+.tmavy .sipka::after { color: var(--zlata); }
+.tmavy .sipka:hover { border-color: var(--zlata); }
+.tmavy .hlavicka { background: rgba(7,3,39,.9); border-bottom-color: var(--line); }
+@supports (backdrop-filter: blur(8px)) { .tmavy .hlavicka { background: rgba(7,3,39,.78); } }
+.tmavy .menu a { color: var(--zlata); }
+.tmavy .menu a:hover, .tmavy .menu a[aria-current] { color: #fff; }
+.tmavy .menu a[aria-current]::after { background: var(--zlata); }
+.tmavy .eshop-odkaz { border-color: rgba(230,196,99,.55); color: var(--zlata); }
+.tmavy .eshop-odkaz:hover { background: var(--zlata); border-color: var(--zlata); color: var(--tma); }
+.tmavy .mobmenu { background: var(--tma); }
+.tmavy .mobmenu__kontakt a { color: var(--zlata); }
+.tmavy .mobmenu__eshop { border: 1px solid var(--line-2); }
+.tmavy .lista { border-bottom: 1px solid var(--line); }
+.tmavy .paticka { background: #03011A; border-top: 1px solid var(--line); }
+.tmavy .sekce--seda { background: var(--bg-2); }
+.tmavy .servis-pas { background: var(--bg-2); }
+.tmavy .podtma { background: radial-gradient(55% 80% at 70% 100%, rgba(53,27,248,.3), rgba(53,27,248,0) 72%), var(--tma); border-bottom: 1px solid var(--line); }
+.tmavy .postup { border-top-color: var(--line-2); }
+.tmavy .formular, .tmavy .sekce--seda .formular { background: var(--bg-3); }
+.tmavy .pole input, .tmavy .pole select, .tmavy .pole textarea { background: rgba(255,255,255,.05); color: #fff; }
+.tmavy .pole input::placeholder, .tmavy .pole textarea::placeholder { color: rgba(255,255,255,.4); }
+.tmavy .pole option { color: #0C0A2E; }
+.tmavy .volby span { background: transparent; }
+.tmavy .volby input:checked + span { color: #fff; border-color: #6F5CFF; }
+.tmavy .kalk { background: var(--bg-2); }
+.tmavy .pozn-ram { color: #fff; }
+.tmavy .kontakt__udaje a:hover { color: var(--zlata); }
+/* produktové karty ve studiu zůstávají světlé (odkazují do e-shopu) */
+.tmavy .karta {
+  --ink: #0C0A2E; --text: #2F2E4A; --muted: #575870; --line: #E3E5EC; --line-2: #D3D6E1; --bg: #fff; --bg-2: #F5F6F9;
+  background: #fff; border-radius: var(--r); overflow: hidden; color: var(--text);
+}
+.tmavy .karta__telo { padding: 14px 16px 16px; }
+.tmavy .karta__foto { border-radius: 0; }
+
+/* úvod: hlavička průhledná přes video, při posunu plná */
+.tmavy--uvod .lista { display: none; }
+.tmavy--uvod .hlavicka { position: fixed; left: 0; right: 0; top: 0; background: transparent; border-bottom-color: transparent; backdrop-filter: none; transition: background-color .3s, border-color .3s; }
+.tmavy--uvod .hlavicka.je-plna, .tmavy--uvod .hlavicka:has(.burger[aria-expanded="true"]) { background: rgba(7,3,39,.86); border-bottom-color: var(--line); }
+@supports (backdrop-filter: blur(8px)) { .tmavy--uvod .hlavicka.je-plna { backdrop-filter: saturate(1.4) blur(10px); } }
+.tmavy--uvod .hlavicka__in { min-height: 84px; }
+.tmavy--uvod .hlavicka.je-plna .hlavicka__in { min-height: 68px; }
+.tmavy--uvod .hlavicka__in { transition: min-height .3s; }
+.hero { position: relative; min-height: max(600px, 100svh); display: grid; isolation: isolate; overflow: hidden; background: var(--tma); color: #fff; }
+.hero__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
+.hero::after {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(7,3,39,.55) 0%, rgba(7,3,39,0) 22%),
+    linear-gradient(0deg, rgba(7,3,39,.92) 0%, rgba(7,3,39,.55) 30%, rgba(7,3,39,0) 62%),
+    linear-gradient(90deg, rgba(7,3,39,.45) 0%, rgba(7,3,39,0) 55%);
+}
+.hero__in { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 2rem; padding-top: 120px; padding-bottom: clamp(3.5rem, 9vh, 6.5rem); }
+.hero__text { max-width: 44rem; }
+.hero h1 { color: #fff; font-size: clamp(3.4rem, 8.4vw, 8rem); line-height: .92; letter-spacing: -0.05em; margin-bottom: 1.5rem; }
+.hero__perex { font-size: clamp(1.06rem, 1.35vw, 1.22rem); color: rgba(255,255,255,.84); max-width: 40ch; margin-bottom: 2rem; }
+.hero__projekt { display: grid; justify-items: end; gap: 4px; text-decoration: none; color: #fff; padding-bottom: 6px; }
+.hero__projekt span { font-size: clamp(1.2rem, 1.8vw, 1.6rem); letter-spacing: .02em; text-transform: uppercase; display: inline-flex; gap: .5em; align-items: center; }
+.hero__projekt span::after { content: "→"; color: var(--zlata); transition: transform .2s; }
+.hero__projekt small { color: rgba(255,255,255,.65); font-size: .85rem; }
+.hero__projekt:hover span::after { transform: translateX(4px); }
+.hero__dolu { position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); width: 26px; height: 42px; border: 1.5px solid rgba(255,255,255,.5); border-radius: 14px; }
+.hero__dolu span { position: absolute; left: 50%; top: 8px; width: 3px; height: 8px; margin-left: -1.5px; border-radius: 2px; background: var(--zlata); animation: kolecko 1.8s ease-in-out infinite; }
+@keyframes kolecko { 0% { transform: translateY(0); opacity: 1; } 70% { transform: translateY(12px); opacity: 0; } 100% { opacity: 0; } }
+@media (max-width: 899px) {
+  .hero__in { grid-template-columns: 1fr; padding-bottom: 4.5rem; }
+  .hero__projekt { justify-items: start; }
+  .hero__projekt span { font-size: 1rem; }
+  .hero__dolu { display: none; }
+  .tmavy--uvod .hlavicka__in { min-height: 68px; }
+}
+
+/* O nás – velký text uprostřed jako na původním webu */
+.manifest { padding-block: clamp(6rem, 14vw, 12rem) clamp(3rem, 6vw, 5rem); }
+.ramecek { display: inline-block; border: 1px solid rgba(255,255,255,.55); padding: 6px 12px; font-size: .82rem; letter-spacing: .08em; text-transform: uppercase; color: #fff; margin-bottom: clamp(2rem, 4vw, 3rem); }
+.manifest__text { font-size: clamp(1.7rem, 3.6vw, 3.3rem); line-height: 1.12; letter-spacing: -0.03em; color: #fff; max-width: 24ch; margin-bottom: clamp(3.5rem, 8vw, 7rem); text-wrap: pretty; }
+.manifest__text span { color: rgba(255,255,255,.5); }
+.tmavy .vyhody { border-top: 1px solid var(--line); border-bottom: 0; }
+
+/* projekty (01)–(05) */
+.projekty { padding-top: clamp(3rem, 6vw, 5rem); }
+.projekty__mrizka { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2.25rem, 4vw, 3.5rem) clamp(1rem, 2vw, 1.5rem); }
+.projekt { display: grid; gap: 16px; text-decoration: none; color: #fff; }
+.projekt__foto { display: block; aspect-ratio: 4 / 3; overflow: hidden; background: var(--bg-2); }
+.projekt__foto img { width: 100%; height: 100%; object-fit: cover; transition: transform .7s cubic-bezier(.2,.7,.2,1), filter .4s; filter: saturate(.92); }
+.projekt:hover .projekt__foto img { transform: scale(1.035); filter: none; }
+.projekt__popis { display: grid; grid-template-columns: 3.4rem minmax(0, 1fr) auto; gap: 12px; align-items: baseline; padding-bottom: 14px; border-bottom: 1px solid var(--line); transition: border-color .3s; }
+.projekt__popis i { font-style: normal; color: var(--zlata); font-size: .95rem; font-variant-numeric: tabular-nums; }
+.projekt__popis b { font-weight: 400; font-size: clamp(1.15rem, 1.6vw, 1.45rem); letter-spacing: -0.02em; }
+.projekt__popis > span { color: var(--muted); font-size: .85rem; white-space: nowrap; }
+.projekt:hover .projekt__popis { border-color: var(--zlata); }
+.projekt:nth-child(5) { grid-column: 1 / -1; }
+.projekt:nth-child(5) .projekt__foto { aspect-ratio: 2.4; }
+@media (max-width: 760px) {
+  .projekty__mrizka { grid-template-columns: 1fr; }
+  .projekt:nth-child(5) .projekt__foto { aspect-ratio: 4 / 3; }
+  .projekt__popis { grid-template-columns: 2.8rem minmax(0, 1fr); }
+  .projekt__popis > span { grid-column: 2; white-space: normal; margin-top: -8px; }
+}
+
+/* fotka přes celou šířku */
+.pas-foto { margin: 0; aspect-ratio: 2.6; overflow: hidden; }
+.pas-foto img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 55%; }
+@media (max-width: 760px) { .pas-foto { aspect-ratio: 4 / 3; } }
+.tmavy--uvod .mobmenu { height: calc(100dvh - 68px); max-height: none; }
+.drobky { align-items: center; } .drobky > span { display: inline-flex; align-items: center; min-height: 40px; }
+@media (min-width: 761px) { .drobky > span { min-height: 0; } }

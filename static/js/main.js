@@ -17,6 +17,20 @@
     else { rej.addEventListener('animationend', function (e) { if (e.target === rej) pryc(); }); setTimeout(pryc, 3200); }
   }
 
+  /* úvod s videem: hlavička plná po posunu, video jen když je vidět */
+  var hlU = d.body.classList.contains('tmavy--uvod') ? $('[data-hlavicka]') : null;
+  if (hlU) {
+    var plna = function () { hlU.classList.toggle('je-plna', window.scrollY > 40); };
+    plna(); window.addEventListener('scroll', plna, { passive: true });
+  }
+  var vid = $('[data-hero-video]');
+  if (vid) {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { vid.removeAttribute('autoplay'); vid.pause(); }
+    else if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (z) { z.forEach(function (e) { if (e.isIntersecting) { var p = vid.play(); if (p && p.catch) p.catch(function () {}); } else vid.pause(); }); }).observe(vid);
+    }
+  }
+
   /* výška hlavičky pro sticky prvky */
   var hl = $('[data-hlavicka]');
   var vyskaHl = function () { if (hl) d.documentElement.style.setProperty('--hl', hl.offsetHeight + 'px'); };
