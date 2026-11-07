@@ -1,0 +1,65 @@
+{% extends "_base.html" %}
+{% set titulek = "Servis akvárií Praha – mořská i sladkovodní | Safe Ocean" %}
+{% set popis = "Pravidelný servis mořských i sladkovodních akvárií: údržba, kontrola technologií, výměna vody a péče o živočichy. Praha." %}
+{% set cesta = "servis/" %}
+{% block obsah %}
+<div class="podtma">
+<div class="wrap">
+  <nav class="drobky" aria-label="Drobečková navigace"><a href="{{ url('') }}">Úvod</a><span aria-hidden="true">/</span><span>Servis</span></nav>
+  <header class="podhlava">
+    <h1>Servis akvárií</h1>
+    <div>
+      <p class="perex">{{ "I to nejkrásnější akvárium potřebuje odbornou péči. Servis zajišťuje dlouhodobou stabilitu, zdraví živočichů, bezchybný vzhled a bezproblémový chod."|cz }}</p>
+      <div class="uvod__akce" style="margin-top:1.5rem"><a class="tl tl--plne" href="#poptavka">Domluvit servis</a></div>
+    </div>
+  </header>
+</div>
+</div>
+<section class="servis-pas" aria-labelledby="co-h">
+  <figure class="servis-pas__foto">{{ img("f/servis-led-2.jpg", alt="Servis mořského akvária – nastavení LED osvětlení nad hladinou", sizes="(min-width: 900px) 50vw, 100vw", eager=True) }}</figure>
+  <div class="servis-pas__text">
+    <h2 id="co-h">Co servis obsahuje</h2>
+    <p>{{ "Pravidelná údržba, kontrola technologií, výměna vody i péče o živočichy probíhá diskrétně a profesionálně. Vy si užíváte výsledek, my se staráme o vše ostatní."|cz }}</p>
+    <ul class="servis-seznam">
+      <li><b>Údržba</b><span>{{ "čištění skel, dekorací, filtrace a odpěňovače"|cz }}</span></li>
+      <li><b>Technologie</b><span>{{ "kontrola a nastavení osvětlení, čerpadel, topení a dávkování"|cz }}</span></li>
+      <li><b>Voda</b><span>{{ "měření parametrů, výměna vody, doplnění soli a prvků"|cz }}</span></li>
+      <li><b>Živočichové</b><span>{{ "kontrola zdraví ryb, korálů a rostlin, prořezávání, krmení"|cz }}</span></li>
+      <li><b>Doporučení</b><span>{{ "co upravit, doplnit nebo vyměnit, než nastane problém"|cz }}</span></li>
+    </ul>
+  </div>
+</section>
+<section class="sekce" aria-labelledby="proc-h">
+  <div class="wrap dvojice">
+    <div>
+      <h2 id="proc-h">{{ "Proč je servis klíčem ke krásnému akváriu"|cz }}</h2>
+      <p>{{ "Akvárium je živý systém. Malé změny v parametrech vody nebo výpadek techniky se projeví až po čase – a pak bývá náprava složitější. Pravidelná péče drží systém stabilní, takže akvárium zůstává tím, čím má být: zdrojem radosti, ne starostí."|cz }}</p>
+      <p>{{ "Četnost návštěv a cenu servisu nastavíme podle velikosti a typu akvária. Mořská akvária obvykle potřebují častější péči než sladkovodní."|cz }}</p>
+    </div>
+    <div class="architekti" style="grid-template-columns:1fr 1fr;gap:16px">
+      <figure style="aspect-ratio:3/4">{{ img("f/utes-siroky.jpg", alt="Mořské akvárium s korálovým útesem, realizace Safe Ocean", sizes="(min-width: 760px) 24vw, 50vw") }}</figure>
+      <figure style="aspect-ratio:3/4">{{ img("f/vaclav-husa.jpg", alt="Václav Husa u mořského akvária v rodinném domě", sizes="(min-width: 760px) 24vw, 50vw", styl="object-position:30% 50%") }}</figure>
+    </div>
+  </div>
+</section>
+<section class="sekce sekce--seda" aria-labelledby="pece-h">
+  <div class="wrap">
+    <div class="sekce-hlava"><div><h2 id="pece-h">Pro péči mezi návštěvami</h2><p>{{ "Krmiva, testy, sůl a doplňky, které používáme i u servisovaných akvárií."|cz }}</p></div><a class="sipka" href="{{ url('eshop/morska-akvaristika/morska-pece') }}">Testy a doplňky</a></div>
+    <div class="mrizka">{% for p in (data.kategorie|selectattr("slug", "eq", "morska-pece")|first).produkty[:4] %}{% include "_produkt_karta.html" %}{% endfor %}</div>
+  </div>
+</section>
+<section class="sekce" aria-labelledby="pop-h">
+  <div class="wrap kontakt">
+    <div>
+      <h2 id="pop-h">Domluvit servis</h2>
+      <p class="perex" style="margin-top:1rem">{{ "Napište, jaké akvárium máte (objem, mořské, nebo sladkovodní) a kde je. Ozveme se s termínem první návštěvy."|cz }}</p>
+      {% set tel = site.kontakt.telefon|replace(' ', '') %}
+      <ul class="kontakt__udaje">
+        <li><span>Telefon</span><a href="tel:{{ tel }}">{{ site.kontakt.telefon }}</a></li>
+        <li><span>E-mail</span><a href="mailto:{{ site.kontakt.email }}">{{ site.kontakt.email }}</a></li>
+      </ul>
+    </div>
+    {% with tema_vychozi = "Servis akvária" %}{% include "_formular.html" %}{% endwith %}
+  </div>
+</section>
+{% endblock %}

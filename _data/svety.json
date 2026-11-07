@@ -1,0 +1,14 @@
+[
+  {"slug": "morska-akvaristika", "nazev": "Mořská akvaristika", "kratce": "Mořská", "foto": "f/koraly-modre.jpg",
+   "alt": "Korálový útes v mořském akváriu pod modrým světlem",
+   "popis": "Ryby, korály a bezobratlí, mořská sůl, technika pro útes, testy, krmení i reverzní osmóza. Ke každému živočichovi poradíme, jestli se hodí do vašeho akvária."},
+  {"slug": "sladkovodni-akvaristika", "nazev": "Sladkovodní akvaristika", "kratce": "Sladkovodní", "foto": "f/terce-rostliny.jpg",
+   "alt": "Terčovci mezi rostlinami ve sladkovodním akváriu",
+   "popis": "Ryby, krevety a rostliny, akvária a sety, filtry, osvětlení, krmiva, hnojiva i kořeny a kameny pro aquascaping."},
+  {"slug": "jezirka", "nazev": "Jezírka", "kratce": "Jezírka", "foto": "f/jezirko.jpg",
+   "alt": "Zahradní jezírko s lekníny a rybami",
+   "popis": "Koi a jezírkové ryby, filtrace a UV lampy, čerpadla, krmiva, péče o vodu, rostliny a fólie pro stavbu jezírka."},
+  {"slug": "teraria", "nazev": "Terária", "kratce": "Terária", "foto": "f/terarium.jpg",
+   "alt": "Pralesní terárium s rostlinami a kořeny",
+   "popis": "Skleněná terária, UVB osvětlení, topení a termostaty, substráty, dekorace, krmení, vitamíny a zvlhčování."}
+]

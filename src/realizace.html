@@ -1,0 +1,31 @@
+{% extends "_base.html" %}
+{% set titulek = "Realizace akvárií na míru | Safe Ocean" %}
+{% set popis = "Akvária na míru v kancelářích, recepcích, rodinných domech i bytech. Mořská i sladkovodní, od 600 do 2 200 litrů." %}
+{% set cesta = "realizace/" %}
+{% block obsah %}
+<div class="podtma">
+<div class="wrap">
+  <nav class="drobky" aria-label="Drobečková navigace"><a href="{{ url('') }}">Úvod</a><span aria-hidden="true">/</span><span>Realizace</span></nav>
+  <header class="podhlava">
+    <h1>Realizace</h1>
+    <p>{{ "Instalaci provádíme s maximálním důrazem na čistotu, ticho a přesnost. Každý krok je pečlivě naplánován tak, aby nenarušil prostor a výsledek byl dokonalý."|cz }}</p>
+  </header>
+</div>
+</div>
+<div class="wrap podtma__dal">
+  <div class="r-vypis">
+    {% for r in data.realizace %}
+    <article class="r-polozka">
+      <a class="r-polozka__foto" href="{{ url('realizace/' ~ r.slug) }}" tabindex="-1" aria-hidden="true">{{ img(r.fotky[0], alt=r.alt, sizes="(min-width: 900px) 56vw, 100vw") }}</a>
+      <div>
+        <p class="udaje-radek"><span><b>{{ r.typ }}</b></span><span>{{ r.litru|replace(" ", " ") }}&nbsp;l</span><span>{{ r.prostor }}</span><span>{{ r.rok }}</span></p>
+        <h2><a href="{{ url('realizace/' ~ r.slug) }}">{{ r.nazev|cz }}</a></h2>
+        <p>{{ r.perex|cz }}</p>
+        <a class="sipka" href="{{ url('realizace/' ~ r.slug) }}">Detail realizace</a>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</div>
+<div class="cta-pas"><div class="wrap cta-pas__in"><div><h2>{{ "Chcete podobné akvárium?"|cz }}</h2><p>{{ "Navrhneme ho přesně pro váš prostor."|cz }}</p></div><div class="cta-pas__akce"><a class="tl tl--plne" href="{{ url('akvaria-na-miru') }}#poptavka">Poptat akvárium</a></div></div></div>
+{% endblock %}

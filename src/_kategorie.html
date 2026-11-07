@@ -1,0 +1,21 @@
+{% extends "_eshop.html" %}
+{% set sv = k.svet_obj %}
+{% set titulek = k.nazev ~ " – " ~ sv.nazev ~ " | E-shop Safe Ocean" %}
+{% set popis = k.popis %}
+{% set cesta = "eshop/" ~ sv.slug ~ "/" ~ k.slug ~ "/" %}
+{% block obsah %}
+<div class="wrap">
+  <nav class="drobky" aria-label="Drobečková navigace"><a href="{{ url('eshop') }}">E-shop</a><span aria-hidden="true">/</span><a href="{{ url('eshop/' ~ sv.slug) }}">{{ sv.nazev }}</a><span aria-hidden="true">/</span><span>{{ k.nazev }}</span></nav>
+  <header class="podhlava">
+    <h1>{{ k.nazev }}</h1>
+    <p>{{ k.popis|cz }}</p>
+  </header>
+  {% set zive = k.produkty|selectattr("ziva")|list|length %}
+  {% if k.slug in ["morska-akvaria", "sladkovodni-akvaria", "teraria"] %}
+  <p class="ukazka-pozn"><b>Na míru</b><span>{{ ("Hotový set nesedí do prostoru? " ~ ("Terárium" if k.slug == "teraria" else "Akvárium") ~ ", skříň i techniku postavíme přesně podle vás.")|cz }} <a href="{{ url('akvaria-na-miru') }}">Na míru →</a></span></p>
+  {% elif zive %}
+  <p class="ukazka-pozn"><b>Živé zboží</b><span>{{ "Jen osobní odběr v Praze 3 nebo rozvoz po Praze. Ke každému druhu poradíme, jestli se hodí k vám."|cz }} <a href="{{ url('eshop/doprava-a-platba') }}#zive">Jak prodáváme živé zboží →</a></span></p>
+  {% endif %}
+  {% with produkty = k.produkty, aktivni = k.slug, svet = sv %}{% include "_vypis.html" %}{% endwith %}
+</div>
+{% endblock %}

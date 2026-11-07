@@ -1,0 +1,18 @@
+{
+  "znamka": 8,
+  "slabiny": [
+    "Sekce Akvárium na míru, PC buňka 6 (Design / Materiály / Bezpečnost / Skrytá technika): popisy pilířů mají jen 0,92rem a barvu --muted, takže působí jako dřív výhody a kroky. Oprava: .pilire dd zvětšit na 1rem a nastavit color: var(--text), aby celá sekce měla jednu úroveň čitelnosti.",
+    "Vybrané produkty na PC, buňky 4–5: kategorie nad názvem (0,8rem) a dvouřádkový popis (0,875rem, --muted) jsou drobné a bledé, takže řádek pod fotkou splývá. Oprava: .karta__popis dát na 0,92rem v barvě var(--text) a .karta__znacka na 0,85rem, aby se karty daly přečíst bez přibližování.",
+    "Realizace na mobilu, buňky 10–12: pět fotek přes celou šířku pod sebou dělá dlouhý monotónní scroll, než přijde servis. Oprava: na 390 px nechat velkou jen první realizaci a další čtyři dát do mřížky 2 × 2 s menšími popisky, případně do vodorovného posuvníku se scroll-snap."
+  ],
+  "zavazne": [],
+  "silne": [
+    "Všechny tři minulé výtky jsou opravené. Popisky výhod jsou teď 0,95rem v #2F2E4A. Celá produktová karta je klikací přes ::before s inset:0 a tlačítko „+“ leží nad ní přes z-index. QA dál hlásí odkaz 86×20, protože měří jen samotný <a>, skutečná dotyková plocha je ale celá karta. Postup realizace je teď řádkový seznam s popisy 1rem v tmavé barvě místo pěti úzkých sloupců.",
+    "Brand sedí. Logo s mantami je vlevo v hlavičce, tmavá #070327 a aktinická modrá #351BF8 jsou z loga, písmo Host Grotesk je ze starého webu klienta.",
+    "Úvod funguje i jako koncept: v tmavém prostoru svítí akvárium a skutečná fotka realizace klienta přesahuje přes hranu. Na první pohled je jasné, že jde o studio akvárií na míru a k tomu obchod.",
+    "Realizace mají jen doložená fakta z briefu (objem, rok, mořské nebo sladkovodní) a kontakt je dohledatelný v liště, v kontaktní sekci s formulářem i v patičce.",
+    "Bez přetékání na všech šesti šířkách, hlavička obchodu s kategoriemi, hledáním a košíkem působí jako profesionální specializovaný e-shop."
+  ],
+  "verdikt": "Odeslat. Všechny výtky z minulého kola jsou opravené a žádná závažná vada nepřibyla. Zbývají jen drobnosti v čitelnosti sekundárních popisků a v rytmu mobilní galerie realizací.",
+  "_hash": "c821ceed7bdadd471b241fdfbb12ef4199989588"
+}

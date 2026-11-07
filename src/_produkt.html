@@ -1,0 +1,108 @@
+{% extends "_eshop.html" %}
+{% set k = p.kategorie %}
+{% set titulek = p.nazev ~ (" (" ~ p.latin ~ ")" if p.latin else "") ~ " – " ~ (k.kratce or k.nazev) ~ " | E-shop Safe Ocean" %}
+{% set popis = p.kratky_popis or k.popis %}
+{% set cesta = "eshop/produkt/" ~ p.slug ~ "/" %}
+{% set sv = p.svet %}
+{% set packshot = p.foto_typ == 'packshot' %}
+{% set v0 = p.varianty[0] if p.varianty else none %}
+{% set cena0 = p._cena0 %}
+{% block head %}
+{% set ld = {"@context": "https://schema.org", "@type": "Product", "name": p.nazev, "description": p.kratky_popis, "category": k.nazev,
+  "offers": {"@type": "Offer", "priceCurrency": "CZK", "price": cena0, "availability": "https://schema.org/InStock", "url": site.url ~ cesta}} %}
+{% if p.znacka %}{% set _ = ld.update({"brand": {"@type": "Brand", "name": p.znacka}}) %}{% endif %}
+{% if p.foto %}{% set _ = ld.update({"image": site.url ~ img_url(p.foto[0], 1280)[base|length:]}) %}{% endif %}
+<script type="application/ld+json">{{ ld|tojson }}</script>
+{% endblock %}
+{% block obsah %}
+<div class="wrap">
+  <nav class="drobky" aria-label="Drobečková navigace"><a href="{{ url('eshop') }}">E-shop</a><span aria-hidden="true">/</span><a href="{{ url('eshop/' ~ sv.slug) }}">{{ sv.nazev }}</a><span aria-hidden="true">/</span><a href="{{ url('eshop/' ~ sv.slug ~ '/' ~ k.slug) }}">{{ k.nazev }}</a><span aria-hidden="true">/</span><span>{{ p.nazev }}</span></nav>
+  <div class="produkt{% if packshot %} produkt--packshot{% endif %}">
+    <div class="galerie" data-galerie>
+      <figure class="galerie__hlavni">{% if p.foto %}{{ img(p.foto[0], alt=p.nazev ~ (" – " ~ p.latin if p.latin else ""), sizes="(min-width: 900px) 50vw, 100vw", eager=True) }}{% endif %}</figure>
+      {% if p.foto|length > 1 %}
+      <div class="galerie__nahledy">
+        {% for f in p.foto %}<button type="button" data-src="{{ img_url(f, 1280) }}" aria-label="Fotka {{ loop.index }}"{% if loop.first %} aria-current="true"{% endif %}>{{ img(f, alt="", sizes="76px", eager=False) }}</button>{% endfor %}
+      </div>
+      {% endif %}
+      {% if p.foto_autor %}<p class="galerie__zdroj">Foto: {{ p.foto_autor }}{% if p.foto_licence %}, {{ p.foto_licence }}{% endif %}{% if p.foto_zdroj %}, <a href="{{ p.foto_zdroj }}" rel="nofollow noopener" target="_blank">zdroj</a>{% endif %} · ilustrační</p>
+      {% elif packshot %}<p class="galerie__zdroj">Foto: {{ p.znacka or "výrobce" }}, ilustrační</p>{% endif %}
+    </div>
+    <div class="produkt__info">
+      {% if p.ziva or p.mrazene or p.stitek %}<div class="karta__tagy">
+        {% if p.ziva %}<span class="tag tag--ziva">Živé zboží</span>{% endif %}
+        {% if p.mrazene %}<span class="tag tag--mraz">Mražené</span>{% endif %}
+        {% if p.stitek %}<span class="tag {{ 'tag--akce' if p.cena_puvodni else 'tag--modra' }}">{{ p.stitek }}</span>{% endif %}
+      </div>{% endif %}
+      <p class="produkt__znacka">{% if p.znacka %}{{ p.znacka }}{% else %}{{ k.nazev }}{% endif %}</p>
+      <h1>{{ p.nazev|cz }}</h1>
+      {% if p.latin %}<p class="produkt__latin">{{ p.latin }}</p>{% endif %}
+      {% if p.kratky_popis %}<p class="produkt__kratce">{{ p.kratky_popis|cz }}</p>{% endif %}
+      {% set polozka = {"slug": p.slug, "nazev": p.nazev, "varianta": (v0.nazev if v0 else ""), "cena": cena0, "foto": (img_url(p.foto[0], 640) if p.foto else ""), "packshot": packshot, "ziva": p.ziva, "mrazene": p.mrazene, "url": url('eshop/produkt/' ~ p.slug)} %}
+      <form class="nakup" data-nakup='{{ polozka|tojson }}'>
+        <p class="produkt__cena"><span class="cena{% if p.cena_puvodni %} cena--akce{% endif %}" data-cena-zobraz>{{ cena0|kc }}</span>{% if p.cena_puvodni %} <s class="produkt__puvodni">{{ p.cena_puvodni|kc }}</s>{% endif %}</p>
+        <p class="produkt__dph">včetně DPH{% if p.ziva %} · cena za kus{% endif %}</p>
+        {% if p.varianty|length > 1 %}
+        <fieldset class="varianty">
+          <legend>{% if p.ziva %}Velikost{% else %}Varianta{% endif %}</legend>
+          <div class="varianty__volby">
+            {% for v in p.varianty %}<label><input type="radio" name="varianta" value="{{ loop.index0 }}" data-cena="{{ v.cena }}" data-nazev="{{ v.nazev }}"{% if loop.first %} checked{% endif %}><span>{{ v.nazev }}<small>{{ v.cena|kc }}</small></span></label>{% endfor %}
+          </div>
+        </fieldset>
+        {% endif %}
+        <div class="koupit">
+          <div class="mnozstvi">
+            <button type="button" data-minus aria-label="Méně">−</button>
+            <input type="number" name="pocet" value="1" min="1" max="50" inputmode="numeric" aria-label="Počet kusů">
+            <button type="button" data-plus aria-label="Více">+</button>
+          </div>
+          <button type="submit" class="tl tl--plne">Přidat do košíku</button>
+        </div>
+      </form>
+      <ul class="produkt__body">
+        {% if p.ziva %}
+        <li><span><b>Živé zboží:</b> {{ "osobní odběr v Praze 3 nebo rozvoz po Praze v termostatickém boxu. Poštou neposíláme."|cz }} <a href="{{ url('eshop/doprava-a-platba') }}#zive">Více</a></span></li>
+        <li><span><b>Před nákupem poradíme,</b> {{ ("jestli se druh hodí k vašim obyvatelům a do vašeho " ~ ("jezírka." if sv.slug == "jezirka" else "akvária."))|cz }}</span></li>
+        {% elif p.mrazene %}
+        <li><span><b>Mražené krmivo:</b> {{ "osobní odběr v Praze 3 nebo rozvoz po Praze, nerozmrazujeme."|cz }} <a href="{{ url('eshop/doprava-a-platba') }}">Doprava</a></span></li>
+        {% else %}
+        <li><span><b>Doprava:</b> {{ "Zásilkovna, PPL nebo osobní odběr v Praze 3."|cz }} <a href="{{ url('eshop/doprava-a-platba') }}">Ceny dopravy</a></span></li>
+        {% endif %}
+        {% if k.slug in ["morska-akvaria", "morska-technika", "sladkovodni-akvaria", "sladkovodni-technika", "reverzni-osmoza"] %}<li><span><b>Instalace:</b> {{ "techniku i akvárium vám můžeme zapojit a nastavit."|cz }} <a href="{{ url('servis') }}">Servis</a></span></li>
+        {% elif k.slug in ["jezirka-filtrace", "jezirka-cerpadla", "jezirka-vystavba"] %}<li><span><b>Stavba jezírka:</b> {{ "jezírko vám navrhneme, postavíme i zapojíme techniku."|cz }} <a href="{{ url('kontakt') }}">Napište nám</a></span></li>
+        {% elif k.slug == "teraria" %}<li><span><b>Terárium na míru:</b> {{ "když rozměr nesedí, postavíme terárium přesně do vašeho prostoru."|cz }} <a href="{{ url('akvaria-na-miru') }}">Na míru</a></span></li>{% endif %}
+        <li><span><b>Dotaz?</b> <a href="tel:{{ site.kontakt.telefon|replace(' ', '') }}">{{ site.kontakt.telefon }}</a> · <a href="mailto:{{ site.kontakt.email }}">{{ site.kontakt.email }}</a></span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="produkt-detail">
+    <div>
+      <h2>Popis</h2>
+      {% for odst in p.popis.split("\n\n") if odst.strip() %}<p>{{ odst|cz }}</p>{% endfor %}
+    </div>
+    <div>
+      {% if p.pece %}
+      <div class="karta-udaje">
+        <h2>Karta péče</h2>
+        <table class="parametry"><tbody>{% for r in p.pece %}<tr><th scope="row">{{ r[0] }}</th><td>{{ r[1]|cz }}</td></tr>{% endfor %}</tbody></table>
+      </div>
+      {% endif %}
+      {% if p.parametry %}
+      <div{% if p.pece %} style="margin-top:28px"{% endif %}>
+        <h2>Parametry</h2>
+        <table class="parametry"><tbody>{% for r in p.parametry %}<tr><th scope="row">{{ r[0] }}</th><td>{{ r[1]|cz }}</td></tr>{% endfor %}</tbody></table>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% set souvisejici = k.produkty|rejectattr("slug", "eq", p.slug)|list %}
+{% if souvisejici %}
+<section class="sekce sekce--seda" aria-labelledby="souv-h">
+  <div class="wrap">
+    <div class="sekce-hlava"><h2 id="souv-h">{{ "Další z kategorie " ~ k.nazev|lower }}</h2><a class="sipka" href="{{ url('eshop/' ~ sv.slug ~ '/' ~ k.slug) }}">Celá kategorie</a></div>
+    <div class="mrizka">{% for p in souvisejici[:4] %}{% include "_produkt_karta.html" %}{% endfor %}</div>
+  </div>
+</section>
+{% endif %}
+{% endblock %}

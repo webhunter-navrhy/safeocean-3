@@ -1,0 +1,70 @@
+{# Výpis e-shopu se sloupcem filtrů. Vstup: produkty, aktivni (slug kategorie nebo ""), svet (objekt světa nebo none). #}
+{% set znacky = produkty|map(attribute="znacka")|select|unique|sort|list %}
+{% set podkaty = produkty|map(attribute="podkat")|select|unique|list %}
+{% set ma_zive = produkty|selectattr("ziva")|list|length %}
+<div class="obchod" data-obchod>
+  <aside class="filtry" id="filtry" aria-label="Filtry">
+    <button type="button" class="tl filtry__zavrit" data-filtry-zavrit>Zavřít filtry</button>
+    <div>
+      <h2>Kategorie</h2>
+      <nav class="filtry__kat" aria-label="Kategorie e-shopu">
+        {% if svet %}
+        <a href="{{ url('eshop/' ~ svet.slug) }}"{% if not aktivni %} aria-current="page"{% endif %}>Vše: {{ svet.kratce|lower }} <span>{{ svet.produkty|length }}</span></a>
+        {% for k in svet.kategorie %}<a href="{{ url('eshop/' ~ svet.slug ~ '/' ~ k.slug) }}"{% if aktivni == k.slug %} aria-current="page"{% endif %}>{{ k.nazev }} <span>{{ k.produkty|length }}</span></a>{% endfor %}
+        {% for s2 in data.svety if s2.slug != svet.slug %}{% if loop.first %}<p class="svet">Další sortiment</p>{% endif %}<a href="{{ url('eshop/' ~ s2.slug) }}">{{ s2.nazev }} <span>{{ s2.produkty|length }}</span></a>{% endfor %}
+        {% else %}
+        {% for s2 in data.svety %}<a href="{{ url('eshop/' ~ s2.slug) }}">{{ s2.nazev }} <span>{{ s2.produkty|length }}</span></a>{% endfor %}
+        {% endif %}
+      </nav>
+    </div>
+    {% if aktivni and podkaty|length > 1 %}
+    <div>
+      <h2>Druh</h2>
+      <div class="filtry__podkat" data-f-podkat>
+        <button type="button" aria-pressed="true" data-podkat="">Vše</button>
+        {% for pk in podkaty %}<button type="button" aria-pressed="false" data-podkat="{{ pk }}">{{ pk }}</button>{% endfor %}
+      </div>
+    </div>
+    {% endif %}
+    {% if ma_zive and ma_zive < produkty|length %}
+    <div>
+      <h2>Dostupnost</h2>
+      <label class="zatrz"><input type="checkbox" data-f-ziva> Jen živé zboží <span>{{ ma_zive }}</span></label>
+    </div>
+    {% endif %}
+    <div>
+      <h2>Cena</h2>
+      {% for od, do, txt in [(0, 500, "do 500 Kč"), (500, 2000, "500 – 2 000 Kč"), (2000, 10000, "2 000 – 10 000 Kč"), (10000, 10000000, "nad 10 000 Kč")] %}
+      {% set n = produkty|selectattr("_cena0", "ge", od)|selectattr("_cena0", "lt", do)|list|length %}
+      {% if n %}<label class="zatrz"><input type="checkbox" data-f-cena="{{ od }}-{{ do }}"> {{ txt|replace(' ', ' ')|replace(' – ', ' – ') }} <span>{{ n }}</span></label>{% endif %}
+      {% endfor %}
+    </div>
+    {% if znacky|length > 1 %}
+    <div>
+      <h2>Značka</h2>
+      {% for z in znacky %}<label class="zatrz"><input type="checkbox" data-f-znacka="{{ z }}"> {{ z }} <span>{{ produkty|selectattr("znacka", "eq", z)|list|length }}</span></label>{% endfor %}
+    </div>
+    {% endif %}
+  </aside>
+  <div class="zaclona" data-zaclona hidden></div>
+  <div>
+    <div class="nastroje">
+      <p class="nastroje__pocet" data-pocet aria-live="polite">{{ produkty|length }} produktů</p>
+      <div class="nastroje__prave">
+        <button type="button" class="tl filtry-tl" data-filtry-otevrit aria-controls="filtry" aria-expanded="false">Filtry</button>
+        <label class="sr" for="razeni">Řadit</label>
+        <select id="razeni" data-razeni>
+          <option value="doporucene">Doporučené</option>
+          <option value="cena-vzestupne">Od nejlevnějšího</option>
+          <option value="cena-sestupne">Od nejdražšího</option>
+          <option value="nazev">Podle názvu</option>
+        </select>
+      </div>
+    </div>
+    <p class="hledani-info" data-hledani-info hidden><span></span><button type="button" data-hledani-zrusit>Zrušit hledání</button></p>
+    <div class="mrizka mrizka--3" data-mrizka>
+      {% for p in produkty %}{% set loop_i = loop.index0 %}{% include "_produkt_karta.html" %}{% endfor %}
+    </div>
+    <p class="prazdne" data-prazdne hidden>{{ "Tomu neodpovídá žádný produkt. Zkuste jiné filtry, nebo nám napište – sehneme i to, co v nabídce není."|cz }}</p>
+  </div>
+</div>

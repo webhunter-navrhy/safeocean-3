@@ -1,0 +1,39 @@
+{
+  "firma": "Safe Ocean",
+  "obor": "akvária na míru – mořská i sladkovodní, návrh, instalace na klíč, servis; nově e-shop",
+  "mesto": "Praha",
+  "osoba": "Václav Husa (husa@safeocean.cz)",
+  "provozovatel": "Assetion s.r.o., Lidická 743/16, 150 00 Praha 5, IČO 61062642 (ARES ověřeno 31. 10. 2026; patička starého webu)",
+  "kontakty": {"telefon": "+420 777 130 102", "adresa": "Vranovská 1287/14, 130 00 Praha 3 – Žižkov", "email": "husa@safeocean.cz", "zdroj": "kopie starého webu webhunter-navrhy/safeocean (contact.html, prodej.html); e-mail z korespondence"},
+  "cilova_skupina": "majitelé bytů a domů s vyšším rozpočtem, firmy (kanceláře, lobby), architekti a designéři interiérů",
+  "ton": "klidný, prémiový, technicky jistý; bez křiku",
+  "brand": {
+    "logo": "~/safeocean/brand/hero.svg – dvě manty v kruhu, přechod bílá → #1538ff / #331bff (vektor z Frameru); stejné logo na tričkách",
+    "barvy": {"tmava": "#070327 / #0d0d0d", "aktinicka_modra": "#351bf8 / #1538ff", "svetla_modra": "#0099ff", "fialova_svetla": "#d9d4ff"},
+    "pisma": "Host Grotesk + Fragment Mono (starý web)",
+    "claim": "Akvária na míru"
+  },
+  "fotky": [
+    "~/safeocean/foto-raw/gphotos g001–g094: Google Fotky album „Safe Ocean“ od klienta 28. 10. 2026, 2400 px",
+    "~/safeocean/foto-raw/aqua, aqua2: Canmedia.org/2024-VasekH/aqua(2), 1199 px, focení 10. 6. 2024"
+  ],
+  "fakta": [
+    {"fakt": "Kancelář co zaujme – mořské, 2 200 l, 2024", "zdroj": "kopie starého webu instalace/cala-sol.html"},
+    {"fakt": "Lobby firmy – sladkovodní, 1 500 l, 2023", "zdroj": "instalace/circle-27.html"},
+    {"fakt": "Klid domova – dvě akvária, mořské + sladkovodní, 1 200 l, 2021", "zdroj": "instalace/haus-schnee.html"},
+    {"fakt": "Akvárium v panelovém domě – mořské, 600 l, 2022, kotvení k nosné konstrukci", "zdroj": "instalace/inner-garden.html"},
+    {"fakt": "Obývací stěna – mořské, 1 000 l, 2020, technika za stěnou průrazem", "zdroj": "instalace/fjordline.html"},
+    {"fakt": "realizace obvykle v řádu několika týdnů", "zdroj": "index.html FAQ"},
+    {"fakt": "spolupráce s architekty, designéry, developery; pevnostní výpočty, zesílená skla", "zdroj": "reference.html"},
+    {"fakt": "seženeme živočicha podle přání", "zdroj": "index.html"}
+  ],
+  "chybi": [
+    "sortiment e-shopu: co přesně prodávat (technika, korály, ryby, péče, servis, poukazy), ceny, skladovost, dopravu živých živočichů",
+    "obchodní podmínky, reklamační řád, GDPR, kdo je prodávající (Assetion s.r.o.?)",
+    "platební brána (karta) nebo jen QR převod",
+    "odkazy na Instagram, YouTube, Facebook (na starém webu byly prázdné)",
+    "přesné přiřazení fotek k realizacím u Obývací stěny a Panelového domu potvrdit",
+    "recenze klientů (Google) – nic nevymýšlíme",
+    "doména safeocean.cz – web na Frameru je offline"
+  ]
+}

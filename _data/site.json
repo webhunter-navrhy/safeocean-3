@@ -1,0 +1,57 @@
+{
+  "slug": "safeocean-3",
+  "nazev": "Safe Ocean",
+  "url": "https://webhunter-navrhy.github.io/safeocean-3/",
+  "base": "/safeocean-3/",
+  "lang": "cs",
+  "popis": "Akvária na míru v Praze – návrh, instalace a servis mořských i sladkovodních akvárií. Obchod s rybami, korály, rostlinami, krmivy, technikou a péčí o vodu.",
+  "navrh": true,
+  "domena": "",
+  "og_image": "f/hero.jpg",
+  "logo": "img/logo-den.svg",
+  "theme_color": "#FFFFFF",
+  "typ": "Store",
+  "ico": "61062642",
+  "provozovatel": "Assetion s.r.o.",
+  "provozovatel_adresa": "Lidická 743/16, 150 00 Praha 5",
+  "kontakt": {
+    "email": "husa@safeocean.cz",
+    "telefon": "+420 777 130 102",
+    "adresa": {
+      "ulice": "Vranovská 1287/14",
+      "psc": "130 00",
+      "mesto": "Praha 3 – Žižkov",
+      "zeme": "CZ"
+    }
+  },
+  "oteviraci_doba": [],
+  "sameas": [],
+  "cenove_rozpeti": "",
+  "formular": {
+    "endpoint": "",
+    "demo": true,
+    "predmet": "Poptávka z webu Safe Ocean"
+  },
+  "nav": [
+    {
+      "text": "Akvária na míru",
+      "href": "akvaria-na-miru"
+    },
+    {
+      "text": "Servis",
+      "href": "servis"
+    },
+    {
+      "text": "Realizace",
+      "href": "realizace"
+    },
+    {
+      "text": "O nás",
+      "href": "o-nas"
+    },
+    {
+      "text": "Kontakt",
+      "href": "kontakt"
+    }
+  ]
+}

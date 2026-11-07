@@ -1,0 +1,10 @@
+{% extends "_base.html" %}
+{% set titulek = "Stránka nenalezena | Safe Ocean" %}
+{% set noindex = True %}
+{% block obsah %}
+<div class="wrap" style="padding-block:var(--sekce)">
+  <h1>Stránka nenalezena</h1>
+  <p class="perex" style="margin:1rem 0 2rem;max-width:46ch">{{ "Tahle stránka neexistuje nebo se přesunula. Zkuste úvodní stránku nebo e-shop."|cz }}</p>
+  <div class="uvod__akce"><a class="tl tl--plne" href="{{ url('') }}">Úvod</a><a class="tl" href="{{ url('eshop') }}">E-shop</a></div>
+</div>
+{% endblock %}

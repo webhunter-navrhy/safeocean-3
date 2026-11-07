@@ -1,0 +1,176 @@
+{% extends "_base.html" %}
+{% set titulek = "Akvária na míru Praha – návrh, výroba, instalace a servis | Safe Ocean" %}
+{% set popis = "Mořská a sladkovodní akvária na míru do domácností, kanceláří a recepcí. Návrh se statikou, výroba, instalace na klíč a servis. Spolupráce s architekty." %}
+{% set cesta = "akvaria-na-miru/" %}
+{% block obsah %}
+<div class="podtma podtma--foto">
+<div class="wrap">
+  <nav class="drobky" aria-label="Drobečková navigace"><a href="{{ url('') }}">Úvod</a><span aria-hidden="true">/</span><span>Akvária na míru</span></nav>
+  <header class="podhlava">
+    <h1>Akvária na&nbsp;míru</h1>
+    <div>
+      <p class="perex">{{ "Kombinujeme elegantní design, kvalitní materiály a odbornou instalaci. Každé akvárium vytváříme přesně podle prostoru i představ klienta."|cz }}</p>
+      <div class="uvod__akce" style="margin-top:1.5rem"><a class="tl tl--plne" href="#poptavka">Poptat akvárium</a><a class="tl tl--svetle" href="#kalkulacka">Spočítat objem a zátěž</a></div>
+    </div>
+  </header>
+</div>
+</div>
+<div class="wrap podtma__foto">
+  <figure class="rd__hero">{{ img("f/utes-uhel.jpg", alt="Dlouhé mořské akvárium s korálovým útesem, pohled šikmo podél přední stěny", sizes="(min-width: 1360px) 1280px, 100vw", eager=True) }}</figure>
+</div>
+
+<section class="sekce" style="padding-top:clamp(1rem,3vw,2rem)" aria-labelledby="dobre-h">
+  <div class="wrap dvojice">
+    <div>
+      <h2 id="dobre-h">{{ "Děláme věci poctivě a bez kompromisů"|cz }}</h2>
+    </div>
+    <div>
+      <p>{{ "Specializujeme se na akvária na míru, kde se snoubí individuální design, prémiové materiály a technická preciznost. Každý projekt navrhujeme s respektem k prostoru, architektuře i životu uvnitř akvária."|cz }}</p>
+      <p>{{ "Technologie zůstávají skryté, pracují tiše a spolehlivě v pozadí. Nabízíme kompletní realizaci na klíč včetně dlouhodobého servisu. Díky tomu vznikají stabilní akvária, která nepůsobí jako doplněk, ale jako přirozená součást interiéru a zdroj klidu."|cz }}</p>
+    </div>
+  </div>
+</section>
+
+<section class="sekce sekce--seda" aria-labelledby="typy-h">
+  <div class="wrap">
+    <div class="sekce-hlava">
+      <div>
+        <h2 id="typy-h">Mořské, nebo sladkovodní?</h2>
+        <p>{{ "Každý typ má své kouzlo, technické nároky i estetický charakter. Pomůžeme vybrat řešení, které bude odpovídat vašemu prostoru i představám."|cz }}</p>
+      </div>
+    </div>
+    <div class="typy">
+      <article class="typ">
+        <figure>{{ img("f/koraly-modre.jpg", alt="Detail mořského útesu s korály a rybami", sizes="(min-width: 760px) 50vw, 100vw") }}</figure>
+        <h3>Mořské akvárium</h3>
+        <p>{{ "Živé umělecké dílo plné sytých barev, pohybu a fascinující biodiverzity. Korály, ryby i bezobratlí. Technicky náročnější – o stabilitu se postará servis."|cz }}</p>
+        <a class="sipka" href="{{ url('eshop/morska-akvaristika/koraly') }}">Korály v e-shopu</a>
+      </article>
+      <article class="typ">
+        <figure>{{ img("f/terce-chodba.jpg", alt="Vysoké sladkovodní akvárium s terčovci a hustými rostlinami v chodbě", sizes="(min-width: 760px) 50vw, 100vw") }}</figure>
+        <h3>Sladkovodní akvárium</h3>
+        <p>{{ "Klid, přirozenost a jemná rostlinná elegance, ideální pro harmonické interiéry. Terčovci, hejna teter a husté rostliny."|cz }}</p>
+        <a class="sipka" href="{{ url('eshop/sladkovodni-akvaristika/rostliny') }}">Rostliny v e-shopu</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="sekce" aria-labelledby="umisteni-h">
+  <div class="wrap">
+    <div class="sekce-hlava">
+      <div>
+        <h2 id="umisteni-h">Kam akvárium umístit</h2>
+        <p>{{ "Akvárium může být dominantou prostoru i jeho jemným doplňkem. Nabízíme široké možnosti tvarů, rozměrů, obkladů i osvětlení."|cz }}</p>
+      </div>
+    </div>
+    <div class="umisteni">
+      <article>
+        <figure>{{ img("f/obyvaci-stena.jpg", alt="Mořské akvárium zabudované do knihovny v obývacím pokoji", sizes="(min-width: 900px) 30vw, (min-width: 480px) 160px, 100vw") }}</figure>
+        <h3>Ve stěně nebo knihovně</h3>
+        <p>{{ "Akvárium jako živý obraz. Technika je schovaná ve skříni nebo za zdí."|cz }}</p>
+      </article>
+      <article>
+        <figure>{{ img("f/ekvator.jpg", alt="Mořské akvárium na konzoli v recepci firmy", sizes="(min-width: 900px) 30vw, (min-width: 480px) 160px, 100vw") }}</figure>
+        <h3>Kancelář a recepce</h3>
+        <p>{{ "Středobod, který zaujme při každé schůzce a návštěvníky naladí."|cz }}</p>
+      </article>
+      <article>
+        <figure>{{ img("f/morske-ostruvek.jpg", alt="Mořské akvárium na tmavé skříni mezi kuchyní a obývacím prostorem", sizes="(min-width: 900px) 30vw, (min-width: 480px) 160px, 100vw") }}</figure>
+        <h3>Volně v prostoru</h3>
+        <p>{{ "Akvárium na skříni jako součást dispozice, s technikou ukrytou pod ním."|cz }}</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="sekce sekce--seda" id="kalkulacka" aria-labelledby="kalk-h">
+  <div class="wrap">
+    <div class="sekce-hlava">
+      <div>
+        <h2 id="kalk-h">Objem a zátěž podlahy</h2>
+        <p>{{ "Bezpečnost je pro nás prioritou. Každé akvárium navrhujeme s ohledem na statiku, nosnost podlahy a dlouhodobé zatížení. Tady si spočítáte orientační hodnoty."|cz }}</p>
+      </div>
+    </div>
+    <div class="kalk" data-kalk>
+      <div class="kalk__ovl">
+        <fieldset class="volby">
+          <legend>Typ</legend>
+          <label><input type="radio" name="k-typ" value="morske" checked><span>Mořské</span></label>
+          <label><input type="radio" name="k-typ" value="sladkovodni"><span>Sladkovodní</span></label>
+        </fieldset>
+        {% for k, nazev, mn, mx, v in [("d", "Délka", 60, 400, 180), ("h", "Hloubka", 30, 120, 70), ("v", "Výška", 30, 90, 60)] %}
+        <label class="posuvnik"><span class="posuvnik__hlava"><span>{{ nazev }}</span><output data-out="{{ k }}">{{ v }} cm</output></span>
+          <input type="range" min="{{ mn }}" max="{{ mx }}" step="5" value="{{ v }}" data-k="{{ k }}"></label>
+        {% endfor %}
+        <p class="male">{{ "Výpočet je orientační: voda, sklo podle výšky, písek a kameny, skříň. Přesnou statiku posoudíme u každé zakázky."|cz }}</p>
+      </div>
+      <div class="kalk__pravy">
+        <dl class="kalk__vysledek">
+          <div><dt>Objem</dt><dd data-r="l">756 l</dd></div>
+          <div><dt>Hmotnost v provozu</dt><dd data-r="kg">1 000 kg</dd></div>
+          <div><dt>Zátěž podlahy</dt><dd data-r="m2">800 kg/m²</dd></div>
+        </dl>
+        <div class="kalk__nakres"><svg viewBox="0 0 400 200" role="img" aria-label="Nákres akvária v poměru stran" data-nakres></svg></div>
+        <p class="pozn-ram" data-r="pozn">{{ "Podlahy v bytech se obvykle navrhují na užitné zatížení 150–200 kg/m². Takové akvárium vyžaduje posouzení statika a roznášecí konstrukci."|cz }}</p>
+        <div><button type="button" class="tl" data-kalk-poslat>Poslat rozměry do poptávky</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sekce" aria-labelledby="postup-h">
+  <div class="wrap">
+    <div class="sekce-hlava"><div><h2 id="postup-h">Jak realizace probíhá</h2><p>{{ "Od prvního návrhu přes výrobu až po instalaci se doba realizace obvykle pohybuje v řádu několika týdnů. Kvalita a preciznost mají přednost před rychlostí."|cz }}</p></div></div>
+    <ol class="kroky" style="margin-top:0">
+      <li><h3>Konzultace</h3><p>{{ "Prohlédneme prostor a probereme, jaké akvárium chcete a kdo v něm bude žít."|cz }}</p></li>
+      <li><h3>Návrh</h3><p>{{ "Rozměry, pohledové osy, světlo, statika a umístění techniky."|cz }}</p></li>
+      <li><h3>Výroba</h3><p>{{ "Sklo s vysokou pevností, precizní spoje, skříň a obklady na míru."|cz }}</p></li>
+      <li><h3>Instalace a spuštění</h3><p>{{ "Doprava, montáž, napuštění a záběh. Čistě, tiše a s respektem k prostoru."|cz }}</p></li>
+      <li><h3>Servis</h3><p>{{ "Pravidelná péče, díky které akvárium zůstává stabilní a krásné."|cz }}</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="sekce sekce--seda" id="architekti" aria-labelledby="arch-h">
+  <div class="wrap architekti">
+    <figure>{{ img("f/bila-stena-sladkovodni.jpg", alt="Ploché sladkovodní akvárium zabudované do bílé stěny jako obraz", sizes="(min-width: 900px) 44vw, 100vw") }}</figure>
+    <div>
+      <span class="nadtitul">Pro architekty, designéry a developery</span>
+      <h2 id="arch-h">{{ "Akvárium řešíme už ve fázi návrhu"|cz }}</h2>
+      <p>{{ "Akvárium vnímáme jako plnohodnotný architektonický prvek, nikoli dodatečný doplněk. Už ve fázi návrhu řešíme pohledové osy, proporce, světlo i technické návaznosti na stavbu – přívod a odpad vody, elektřinu, větrání a přístup k technice."|cz }}</p>
+      <p>{{ "Díky tomu akvárium přirozeně zapadá do konceptu interiéru a podporuje jeho charakter. Vznikají nadčasové realizace, které působí promyšleně i po letech."|cz }}</p>
+      <a class="sipka" href="#poptavka">Domluvit spolupráci</a>
+    </div>
+  </div>
+</section>
+
+<section class="sekce" aria-labelledby="real-h">
+  <div class="wrap">
+    <div class="sekce-hlava"><div><h2 id="real-h">Realizace</h2></div><a class="sipka" href="{{ url('realizace') }}">Všechny realizace</a></div>
+    <div class="mrizka mrizka--3">
+      {% for r in data.realizace[:3] %}
+      <a class="real" href="{{ url('realizace/' ~ r.slug) }}">
+        <span class="real__foto">{{ img(r.fotky[0], alt=r.alt, sizes="(min-width: 760px) 30vw, 50vw") }}</span>
+        <span class="real__popis"><b>{{ r.nazev|cz }}</b><span>{{ r.litru|replace(" ", " ") }}&nbsp;l · {{ r.rok }}</span></span>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="sekce sekce--seda" aria-labelledby="pop-h">
+  <div class="wrap kontakt">
+    <div>
+      <h2 id="pop-h">{{ "Poptávka akvária na míru"|cz }}</h2>
+      <p class="perex" style="margin-top:1rem">{{ "Napište, kam akvárium chcete, přibližné rozměry a jestli mořské, nebo sladkovodní. Ozveme se a domluvíme konzultaci."|cz }}</p>
+      {% set tel = site.kontakt.telefon|replace(' ', '') %}
+      <ul class="kontakt__udaje">
+        <li><span>Telefon</span><a href="tel:{{ tel }}">{{ site.kontakt.telefon }}</a></li>
+        <li><span>E-mail</span><a href="mailto:{{ site.kontakt.email }}">{{ site.kontakt.email }}</a></li>
+      </ul>
+    </div>
+    {% include "_formular.html" %}
+  </div>
+</section>
+{% endblock %}

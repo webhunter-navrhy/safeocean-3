@@ -1,0 +1,23 @@
+{% extends "_base.html" %}
+{% set titulek = "Kontakt | Safe Ocean – akvária na míru Praha" %}
+{% set popis = "Safe Ocean, Vranovská 1287/14, Praha 3 – Žižkov. Telefon +420 777 130 102, husa@safeocean.cz." %}
+{% set cesta = "kontakt/" %}
+{% block obsah %}
+{% set tel = site.kontakt.telefon|replace(' ', '') %}
+<div class="wrap">
+  <nav class="drobky" aria-label="Drobečková navigace"><a href="{{ url('') }}">Úvod</a><span aria-hidden="true">/</span><span>Kontakt</span></nav>
+  <header class="podhlava"><h1>Kontakt</h1><p>{{ "Máte zájem o akvárium na míru, servis nebo dotaz k objednávce? Ozvěte se, společně vymyslíme řešení."|cz }}</p></header>
+  <div class="kontakt" style="padding-bottom:var(--sekce)">
+    <div>
+      <ul class="kontakt__udaje" style="margin-top:0">
+        <li><span>Telefon</span><a href="tel:{{ tel }}">{{ site.kontakt.telefon }}</a></li>
+        <li><span>E-mail</span><a href="mailto:{{ site.kontakt.email }}">{{ site.kontakt.email }}</a></li>
+        <li><span>Adresa</span><span style="color:var(--ink)">{{ site.kontakt.adresa.ulice }}<br>{{ site.kontakt.adresa.psc }} {{ site.kontakt.adresa.mesto }}</span></li>
+        <li><span>Provozovatel</span><span style="color:var(--ink)">{{ site.provozovatel }}<br>{{ site.provozovatel_adresa }}<br>IČO {{ site.ico }}</span></li>
+      </ul>
+      <figure class="studio__foto" style="margin-top:2rem;aspect-ratio:3/2">{{ img("f/lobby-vaclav.jpg", alt="Václav Husa u sladkovodního akvária v recepci", sizes="(min-width: 900px) 40vw, 100vw") }}</figure>
+    </div>
+    {% include "_formular.html" %}
+  </div>
+</div>
+{% endblock %}

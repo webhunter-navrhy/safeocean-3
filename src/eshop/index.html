@@ -1,0 +1,89 @@
+{% extends "_eshop.html" %}
+{% set titulek = "E-shop Safe Ocean – mořská a sladkovodní akvaristika, jezírka, terária" %}
+{% set popis = "E-shop pro akvaristy a teraristy: mořské a sladkovodní ryby, korály, rostliny, technika, krmiva, jezírka a terária. Osobní odběr v Praze 3, rozvoz po Praze." %}
+{% set cesta = "eshop/" %}
+{% macro polozek(n) %}{{ n }} {% if n == 1 %}položka{% elif 2 <= n <= 4 %}položky{% else %}položek{% endif %}{% endmacro %}
+{% block obsah %}
+<section class="eshop-uvod">
+  <div class="wrap">
+    <div class="eshop-uvod__hlava">
+      <h1>{{ "E-shop pro akvaristy a teraristy"|cz }}</h1>
+      <p class="perex">{{ "Vybíráme to, co sami používáme u akvárií a terárií našich klientů. Živé zboží si můžete prohlédnout a vyzvednout osobně v Praze 3."|cz }}</p>
+    </div>
+    <div class="svety">
+      {% for s in data.svety %}
+      <article class="svet-karta">
+        <a class="svet-karta__foto" href="{{ url('eshop/' ~ s.slug) }}" tabindex="-1" aria-hidden="true">{% if s.foto %}{{ img(s.foto, alt="", sizes="(min-width: 1100px) 25vw, (min-width: 640px) 50vw, 100vw", eager=loop.index <= 2) }}{% endif %}</a>
+        <div class="svet-karta__telo">
+          <h2><a href="{{ url('eshop/' ~ s.slug) }}">{{ s.nazev }}</a></h2>
+          <ul>{% for k in s.kategorie[:5] %}<li><a href="{{ url('eshop/' ~ s.slug ~ '/' ~ k.slug) }}">{{ k.kratce or k.nazev }}</a></li>{% endfor %}</ul>
+          <a class="sipka" href="{{ url('eshop/' ~ s.slug) }}">{% if s.kategorie|length > 5 %}{{ "a dalších " ~ (s.kategorie|length - 5) ~ " sekcí" }}{% else %}{{ polozek(s.produkty|length) }}{% endif %}</a>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+<div class="wrap">
+  <ul class="vyhody">
+    <li><b>Osobní odběr v&nbsp;Praze&nbsp;3</b><span>{{ "Živé a mražené zboží osobně nebo rozvozem po Praze."|cz }}</span></li>
+    <li><b>Suché zboží po celé ČR</b><span>{{ "Zásilkovna nebo PPL do 2 pracovních dnů."|cz }}</span></li>
+    <li><b>Poradíme s výběrem</b><span>{{ "Jestli se druh hodí k vašim obyvatelům i k vaší vodě."|cz }}</span></li>
+    <li><b>Instalace a servis</b><span>{{ "Techniku vám zapojíme, akvárium i terárium postavíme na míru."|cz }}</span></li>
+  </ul>
+</div>
+
+{% if data.vyprodej %}
+<section class="sekce" aria-labelledby="vyp-h">
+  <div class="wrap">
+    <div class="sekce-hlava">
+      <div><h2 id="vyp-h">Výprodej</h2><p>{{ "Zboží ve slevě, dokud nedojdou zásoby."|cz }}</p></div>
+      <a class="sipka" href="{{ url('eshop/vyprodej') }}">Celý výprodej</a>
+    </div>
+    <div class="mrizka">{% for p in data.vyprodej[:4] %}{% include "_produkt_karta.html" %}{% endfor %}</div>
+  </div>
+</section>
+{% endif %}
+
+<section class="sekce sekce--seda" aria-labelledby="obl-h">
+  <div class="wrap">
+    <div class="sekce-hlava">
+      <div><h2 id="obl-h">Oblíbené</h2></div>
+      <div class="zalozky" role="tablist" aria-label="Oblíbené podle sortimentu">
+        {% for s in data.svety %}<button type="button" role="tab" id="tab-{{ loop.index }}" aria-controls="panel-{{ loop.index }}" aria-selected="{{ 'true' if loop.first else 'false' }}"{% if not loop.first %} tabindex="-1"{% endif %}>{{ s.kratce }}</button>{% endfor %}
+      </div>
+    </div>
+    {% for s in data.svety %}
+    <div class="zalozky-panel" role="tabpanel" id="panel-{{ loop.index }}" aria-labelledby="tab-{{ loop.index }}"{% if not loop.first %} hidden{% endif %}>
+      <div class="mrizka">{% for p in s.vyber %}{% include "_produkt_karta.html" %}{% endfor %}</div>
+      <p class="panel-dalsi"><a class="sipka" href="{{ url('eshop/' ~ s.slug) }}">{{ "Vše: " ~ s.nazev|lower }}</a></p>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="sekce" aria-labelledby="zn-h">
+  <div class="wrap znacky-pas">
+    <div>
+      <h2 id="zn-h">Značky</h2>
+      <p>{{ "Technika a krmiva od výrobců, se kterými máme dlouhodobou zkušenost."|cz }}</p>
+      <a class="sipka" href="{{ url('eshop/znacky') }}">Všechny značky</a>
+    </div>
+    <ul class="znacky-seznam">
+      {% for z, ps in data.znacky %}<li><a href="{{ url('eshop/znacky') }}#{{ z|slug }}">{{ z }}<span>{{ ps|length }}</span></a></li>{% endfor %}
+    </ul>
+  </div>
+</section>
+
+<section class="na-miru-pas" aria-labelledby="nm-h">
+  <div class="wrap na-miru-pas__in">
+    <figure>{{ img("f/obyvaci-stena.jpg", alt="Akvárium zabudované v obývací stěně, realizace Safe Ocean", sizes="(min-width: 900px) 45vw, 100vw", eager=False) }}</figure>
+    <div>
+      <span class="nadtitul nadtitul--svetly">Safe Ocean</span>
+      <h2 id="nm-h">{{ "Akvárium nebo terárium na míru"|cz }}</h2>
+      <p>{{ "Když hotový set nesedí do prostoru, navrhneme a postavíme akvárium nebo terárium přesně podle vás – včetně skříně, techniky a pravidelného servisu."|cz }}</p>
+      <div class="uvod__akce"><a class="tl tl--plne" href="{{ url('akvaria-na-miru') }}">Na míru</a><a class="tl tl--svetle" href="{{ url('realizace') }}">Realizace</a></div>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "_eshop.html" %}
+{% set titulek = s.nazev ~ " | E-shop Safe Ocean" %}
+{% set popis = s.popis %}
+{% set cesta = "eshop/" ~ s.slug ~ "/" %}
+{% macro polozek(n) %}{{ n }} {% if n == 1 %}položka{% elif 2 <= n <= 4 %}položky{% else %}položek{% endif %}{% endmacro %}
+{% block obsah %}
+<div class="wrap">
+  <nav class="drobky" aria-label="Drobečková navigace"><a href="{{ url('eshop') }}">E-shop</a><span aria-hidden="true">/</span><span>{{ s.nazev }}</span></nav>
+  <header class="svet-hlava">
+    <div class="svet-hlava__text">
+      <h1>{{ s.nazev }}</h1>
+      <p>{{ s.popis|cz }}</p>
+      <p class="svet-hlava__pocet">{{ polozek(s.produkty|length) }} · {{ s.kategorie|length }} sekcí</p>
+    </div>
+    {% if s.foto %}<figure class="svet-hlava__foto">{{ img(s.foto, alt=s.alt, sizes="(min-width: 900px) 50vw, 100vw", eager=True) }}</figure>{% endif %}
+  </header>
+  <nav class="podsekce" aria-label="Sekce: {{ s.nazev }}">
+    {% for k in s.kategorie %}
+    {% set fs = k.produkty|selectattr("foto")|list %}{% set nahled = fs[0] if fs else None %}
+    <a class="podsekce__a{% if nahled and nahled.foto_typ == 'packshot' %} podsekce__a--packshot{% endif %}" href="{{ url('eshop/' ~ s.slug ~ '/' ~ k.slug) }}">
+      <span class="podsekce__foto">{% if nahled %}{{ img(nahled.foto[0], alt="", sizes="72px", eager=False) }}{% endif %}</span>
+      <span class="podsekce__text"><b>{{ k.nazev }}</b><small>{{ polozek(k.produkty|length) }}</small></span>
+      <svg width="14" height="14" viewBox="0 0 12 12" aria-hidden="true"><path d="m4 2 4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+    </a>
+    {% endfor %}
+  </nav>
+  <h2 class="svet-vypis-h">{{ "Celý sortiment – " ~ s.nazev|lower }}</h2>
+  {% with produkty = s.produkty, aktivni = "", svet = s %}{% include "_vypis.html" %}{% endwith %}
+</div>
+{% endblock %}

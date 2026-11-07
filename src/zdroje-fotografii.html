@@ -1,0 +1,27 @@
+{% extends "_base.html" %}
+{% set titulek = "Zdroje fotografií | Safe Ocean" %}
+{% set cesta = "zdroje-fotografii/" %}
+{% set noindex = True %}
+{% block obsah %}
+<div class="wrap">
+  <nav class="drobky" aria-label="Drobečková navigace"><a href="{{ url('') }}">Úvod</a><span aria-hidden="true">/</span><span>Zdroje fotografií</span></nav>
+  <header class="podhlava"><h1>Zdroje fotografií</h1><p>{{ "Fotografie akvárií, realizací a servisu jsou vlastní fotografie Safe Ocean. Produktové fotografie v e-shopu jsou ilustrační."|cz }}</p></header>
+  <div class="text-stranka">
+    <h2 style="margin-top:0">Produkty výrobců</h2>
+    <p>{{ "Fotografie krmiv, techniky, akvárií a přípravků pocházejí od jejich výrobců a slouží k ilustraci zboží."|cz }}</p>
+    <h2>Fotografie živočichů a rostlin</h2>
+    <p>{{ "Ilustrační fotografie druhů pocházejí z Wikimedia Commons a jsou použity podle uvedených licencí."|cz }}</p>
+    <table class="tabulka">
+      <thead><tr><th scope="col">Produkt</th><th scope="col">Autor a licence</th><th scope="col">Zdroj</th></tr></thead>
+      <tbody>
+        {% for s in data.svety if s.kredit and s.kredit.zdroj %}
+        <tr><td><a href="{{ url('eshop/' ~ s.slug) }}">{{ s.nazev }} (úvodní foto)</a></td><td>{{ s.kredit.autor or "neuveden" }}{% if s.kredit.licence %}, {{ s.kredit.licence }}{% endif %}</td><td><a href="{{ s.kredit.zdroj }}" rel="nofollow noopener" target="_blank">odkaz</a></td></tr>
+        {% endfor %}
+        {% for p in data.produkty if p.foto_autor %}
+        <tr><td><a href="{{ url('eshop/produkt/' ~ p.slug) }}">{{ p.nazev }}</a></td><td>{{ p.foto_autor }}{% if p.foto_licence %}, {{ p.foto_licence }}{% endif %}</td><td>{% if p.foto_zdroj %}<a href="{{ p.foto_zdroj }}" rel="nofollow noopener" target="_blank">odkaz</a>{% endif %}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

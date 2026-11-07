@@ -1,0 +1,20 @@
+<form class="formular" id="poptavka" method="post" data-formular data-endpoint="{{ site.formular.endpoint }}" data-demo="{{ 1 if site.formular.demo or not site.formular.endpoint else 0 }}">
+  <div class="formular__radek">
+    <label class="pole">Jméno <input name="jmeno" autocomplete="name" required></label>
+    <label class="pole">Telefon <input name="telefon" type="tel" autocomplete="tel"></label>
+  </div>
+  <label class="pole">E-mail <input name="email" type="email" autocomplete="email" required></label>
+  <fieldset class="volby">
+    <legend>Co řešíte</legend>
+    {% set tema_vychozi = tema_vychozi if tema_vychozi is defined else "Akvárium na míru" %}
+    {% for t in ["Akvárium na míru", "Servis akvária", "Obchod a objednávky", "Spolupráce (architekt, developer)"] %}
+    <label><input type="radio" name="tema" value="{{ t }}"{% if t == tema_vychozi %} checked{% endif %}><span>{{ t }}</span></label>
+    {% endfor %}
+  </fieldset>
+  <label class="pole">Zpráva <textarea name="zprava" id="poptavka-zprava" rows="5" required placeholder="Kam akvárium chcete, přibližné rozměry, mořské, nebo sladkovodní…"></textarea></label>
+  <div class="past" aria-hidden="true"><label>Nevyplňovat <input name="_gotcha" tabindex="-1" autocomplete="off"></label></div>
+  <input type="hidden" name="_subject" value="{{ site.formular.predmet }}">
+  <div><button type="submit" class="tl tl--plne">Odeslat poptávku</button></div>
+  <p class="formular__pozn">Ozveme se e-mailem nebo telefonem. Údaje použijeme jen k vyřízení poptávky.</p>
+  <p class="formular-stav" role="status" aria-live="polite"></p>
+</form>

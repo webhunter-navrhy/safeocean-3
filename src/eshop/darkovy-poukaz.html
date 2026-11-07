@@ -1,0 +1,46 @@
+{% extends "_eshop.html" %}
+{% set titulek = "Dárkový poukaz | E-shop Safe Ocean" %}
+{% set popis = "Dárkový poukaz Safe Ocean na nákup v e-shopu, živé zboží i servis akvária." %}
+{% set cesta = "eshop/darkovy-poukaz/" %}
+{% set hodnoty = [500, 1000, 2000, 5000] %}
+{% set polozka = {"slug": "darkovy-poukaz", "nazev": "Dárkový poukaz", "varianta": "500 Kč", "cena": 500, "foto": base ~ "img/logo-den.svg", "packshot": True, "ziva": False, "mrazene": False, "url": url('eshop/darkovy-poukaz')} %}
+{% block obsah %}
+<div class="wrap">
+  <nav class="drobky" aria-label="Drobečková navigace"><a href="{{ url('eshop') }}">E-shop</a><span aria-hidden="true">/</span><span>Dárkový poukaz</span></nav>
+  <div class="produkt poukaz">
+    <div class="poukaz__karta" aria-hidden="true">
+      <img src="{{ base }}img/logo-noc.svg" alt="" width="46" height="70">
+      <div><p class="poukaz__nazev">Safe Ocean</p><p class="poukaz__typ">Dárkový poukaz</p></div>
+      <p class="poukaz__hodnota" data-poukaz-hodnota>{{ 500|kc }}</p>
+    </div>
+    <div class="produkt__info">
+      <p class="produkt__znacka">Safe Ocean</p>
+      <h1>Dárkový poukaz</h1>
+      <p class="produkt__kratce">{{ "Poukaz na nákup v e-shopu i na prodejně – na ryby, korály, rostliny, techniku, krmiva i servis akvária. Platí 12 měsíců."|cz }}</p>
+      <form class="nakup" data-nakup='{{ polozka|tojson }}'>
+        <p class="produkt__cena"><span class="cena" data-cena-zobraz>{{ 500|kc }}</span></p>
+        <p class="produkt__dph">Poukaz pošleme e-mailem jako PDF k vytištění</p>
+        <fieldset class="varianty">
+          <legend>Hodnota</legend>
+          <div class="varianty__volby">
+            {% for h in hodnoty %}<label><input type="radio" name="varianta" value="{{ loop.index0 }}" data-cena="{{ h }}" data-nazev="{{ h|kc }}"{% if loop.first %} checked{% endif %}><span>{{ h|kc }}</span></label>{% endfor %}
+          </div>
+        </fieldset>
+        <div class="koupit">
+          <div class="mnozstvi">
+            <button type="button" data-minus aria-label="Méně">−</button>
+            <input type="number" name="pocet" value="1" min="1" max="50" inputmode="numeric" aria-label="Počet kusů">
+            <button type="button" data-plus aria-label="Více">+</button>
+          </div>
+          <button type="submit" class="tl tl--plne">Přidat do košíku</button>
+        </div>
+      </form>
+      <ul class="produkt__body">
+        <li><span><b>Doručení:</b> {{ "PDF poukaz e-mailem hned po zaplacení, doprava zdarma."|cz }}</span></li>
+        <li><span><b>Na servis i na míru:</b> {{ "poukaz lze uplatnit i na servis nebo jako zálohu na akvárium či terárium na míru."|cz }}</span></li>
+        <li><span><b>Dotaz?</b> <a href="tel:{{ tel }}">{{ site.kontakt.telefon }}</a> · <a href="mailto:{{ site.kontakt.email }}">{{ site.kontakt.email }}</a></span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}

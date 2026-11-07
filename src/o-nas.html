@@ -1,0 +1,42 @@
+{% extends "_base.html" %}
+{% set titulek = "O nás – Safe Ocean, akvária na míru Praha" %}
+{% set popis = "Safe Ocean – akvária a terária na míru, servis a e-shop pro akvaristy. Václav Husa, Praha 3." %}
+{% set cesta = "o-nas/" %}
+{% block obsah %}
+<div class="podtma">
+<div class="wrap">
+  <nav class="drobky" aria-label="Drobečková navigace"><a href="{{ url('') }}">Úvod</a><span aria-hidden="true">/</span><span>O nás</span></nav>
+  <header class="podhlava"><h1>O nás</h1></header>
+</div>
+</div>
+<div class="wrap podtma__dal">
+  <div class="onas">
+    <figure>{{ img("f/vaclav-husa-2.jpg", alt="Václav Husa, Safe Ocean, u mořského akvária", sizes="(min-width: 900px) 44vw, 100vw", eager=True) }}<figcaption>Václav Husa, Safe Ocean</figcaption></figure>
+    <div>
+      <h2>{{ "Děláme věci tak, aby stály za to"|cz }}</h2>
+      <p class="perex" style="margin-top:1.2rem">{{ "V Safe Ocean děláme věci poctivě a bez kompromisů. Specializujeme se na akvária na míru, kde se snoubí individuální design, prémiové materiály a technická preciznost."|cz }}</p>
+      <p>{{ "Nesoustředíme se jen na samotnou výrobu – řešíme celý proces od návrhu přes instalaci až po pravidelný servis. Každé akvárium navrhujeme tak, aby zapadlo do interiéru a bylo zároveň snadno udržovatelné."|cz }}</p>
+      <p>{{ "Výběr živočichů přizpůsobujeme nejen estetice, ale i biologické rovnováze. Jsme schopni sehnat živočicha podle vašich požadavků a vytvořit mu ideální podmínky. Doporučujeme druhy, které se vzájemně doplňují a dlouhodobě prosperují."|cz }}</p>
+      <div class="uvod__akce" style="margin-top:1.75rem"><a class="tl tl--plne" href="{{ url('kontakt') }}">Kontakt</a><a class="tl" href="{{ url('realizace') }}">Realizace</a></div>
+    </div>
+  </div>
+</div>
+<section class="sekce sekce--seda" aria-labelledby="bezp-h">
+  <div class="wrap dvojice">
+    <div><h2 id="bezp-h">{{ "Bezpečnost a konstrukční jistota"|cz }}</h2></div>
+    <div>
+      <p>{{ "Bezpečnost je pro nás prioritou. Každé akvárium je navrženo s ohledem na statiku, nosnost podlahy a dlouhodobé zatížení. Používáme pevnostní výpočty, zesílená skla a konstrukce přizpůsobené konkrétnímu prostoru."|cz }}</p>
+      <p>{{ "Spoje, přepady i technické komory jsou řešeny tak, aby minimalizovaly rizika a maximalizovaly životnost celého systému. Akvárium tak není jen krásné, ale i bezpečné řešení pro náročné rezidenční a komerční prostory."|cz }}</p>
+    </div>
+  </div>
+</section>
+<section class="sekce" aria-labelledby="obchod-h">
+  <div class="wrap dvojice">
+    <div><h2 id="obchod-h">{{ "E-shop pro akvaristy a teraristy"|cz }}</h2></div>
+    <div>
+      <p>{{ "V samostatném e-shopu nabízíme to, s čím sami pracujeme u akvárií našich klientů: ryby, korály, rostliny, krmiva a techniku pro mořskou i sladkovodní akvaristiku, jezírka a terária. Živé zboží předáváme osobně, abychom mohli poradit s aklimatizací."|cz }}</p>
+      <a class="sipka" href="{{ url('eshop') }}">Do e-shopu</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

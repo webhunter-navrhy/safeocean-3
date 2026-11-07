@@ -1,0 +1,38 @@
+{% extends "_eshop.html" %}
+{% set titulek = "Doprava a platba | E-shop Safe Ocean" %}
+{% set cesta = "eshop/doprava-a-platba/" %}
+{% block obsah %}
+<div class="wrap">
+  <nav class="drobky" aria-label="Drobečková navigace"><a href="{{ url('eshop') }}">E-shop</a><span aria-hidden="true">/</span><span>Doprava a platba</span></nav>
+  <header class="podhlava"><h1>Doprava a platba</h1><p>{{ "Suché zboží posíláme po celé republice. Živé a mražené zboží předáváme jen osobně v Praze 3 nebo rozvozem po Praze."|cz }}</p></header>
+  <div class="text-stranka">
+    <p class="ukazka-pozn"><b>Návrh</b><span>{{ "Ceny a podmínky dopravy jsou ukázkové, skutečné doplní Safe Ocean."|cz }}</span></p>
+    <h2 style="margin-top:0">Doprava</h2>
+    <table class="tabulka">
+      <thead><tr><th scope="col">Způsob</th><th scope="col">Pro</th><th scope="col">Cena</th></tr></thead>
+      <tbody>
+        <tr><td>{{ "Osobní odběr – " ~ site.kontakt.adresa.ulice ~ ", Praha 3" }}</td><td>všechno zboží</td><td>zdarma</td></tr>
+        <tr><td>Rozvoz po Praze</td><td>všechno zboží</td><td>{{ 190|kc }}</td></tr>
+        <tr><td>Zásilkovna – výdejní místo</td><td>suché zboží</td><td>{{ 89|kc }}</td></tr>
+        <tr><td>PPL – na adresu</td><td>suché zboží</td><td>{{ 139|kc }}</td></tr>
+      </tbody>
+    </table>
+    <h2>Platba</h2>
+    <ul>
+      <li>{{ "Bankovní převodem nebo QR platbou – údaje pošleme e-mailem po potvrzení objednávky."|cz }}</li>
+      <li>{{ "Kartou online přes platební bránu."|cz }}</li>
+      <li>{{ "Hotově nebo kartou při osobním odběru."|cz }}</li>
+    </ul>
+    <h2 id="zive">Živé zboží</h2>
+    <p>{{ "Ryby (i jezírkové), korály, bezobratlé a rostliny prodáváme tak, aby k vám dorazily v pořádku a dobře se aklimatizovaly:"|cz }}</p>
+    <ul>
+      <li>{{ "Živé zboží neposíláme poštou ani přepravní službou. Předáváme ho osobně v Praze 3 nebo ho přivezeme v termostatickém boxu po Praze."|cz }}</li>
+      <li>{{ "Termín předání domluvíme po objednávce, aby živočich nečekal v sáčku zbytečně dlouho."|cz }}</li>
+      <li>{{ "Před nákupem poradíme, jestli se druh hodí k vašim obyvatelům, do vaší velikosti akvária a k vašim parametrům vody."|cz }}</li>
+      <li>{{ "Při předání dostanete postup aklimatizace."|cz }}</li>
+    </ul>
+    <h2>Mražené krmivo</h2>
+    <p>{{ "Mražené krmivo předáváme jen osobně nebo rozvozem po Praze, aby nerozmrzlo."|cz }}</p>
+  </div>
+</div>
+{% endblock %}

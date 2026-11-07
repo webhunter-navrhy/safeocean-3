@@ -1,0 +1,26 @@
+{# Karta produktu. Vstup: p (produkt). #}
+{% set v0 = p.varianty[0] if p.varianty else none %}
+{% set cena0 = v0.cena if v0 else p.cena %}
+{% set packshot = p.foto_typ == 'packshot' %}
+{% set polozka = {"slug": p.slug, "nazev": p.nazev, "varianta": (v0.nazev if v0 else ""), "cena": cena0, "foto": (img_url(p.foto[0], 640) if p.foto else ""), "packshot": packshot, "ziva": p.ziva, "mrazene": p.mrazene, "url": url('eshop/produkt/' ~ p.slug)} %}
+<article class="karta{% if packshot %} karta--packshot{% endif %}" data-karta data-kat="{{ p.kat }}" data-podkat="{{ p.podkat }}" data-znacka="{{ p.znacka }}" data-cena="{{ cena0 }}" data-ziva="{{ 1 if p.ziva else 0 }}" data-hledat="{{ (p.nazev ~ ' ' ~ p.znacka ~ ' ' ~ p.latin ~ ' ' ~ p.podkat ~ ' ' ~ p.kategorie.nazev ~ ' ' ~ p.svet.nazev)|lower }}" data-poradi="{{ loop_i if loop_i is defined else 0 }}">
+  <a class="karta__foto" href="{{ url('eshop/produkt/' ~ p.slug) }}" tabindex="-1" aria-hidden="true">
+    {% if p.foto %}{{ img(p.foto[0], alt="", sizes="(min-width: 1100px) 22vw, (min-width: 760px) 30vw, 48vw", eager=False) }}{% endif %}
+  </a>
+  {% if p.ziva or p.mrazene or p.stitek %}<div class="karta__tagy">
+    {% if p.ziva %}<span class="tag tag--ziva">Živé</span>{% endif %}
+    {% if p.mrazene %}<span class="tag tag--mraz">Mražené</span>{% endif %}
+    {% if p.stitek %}<span class="tag {{ 'tag--akce' if p.cena_puvodni else 'tag--modra' }}">{{ p.stitek }}{% if p.cena_puvodni %} −{{ ((1 - cena0 / p.cena_puvodni) * 100)|round|int }}&nbsp;%{% endif %}</span>{% endif %}
+  </div>{% endif %}
+  <div class="karta__telo">
+    <p class="karta__znacka">{% if p.znacka %}{{ p.znacka }}{% else %}{{ p.kategorie.kratce or p.kategorie.nazev }}{% endif %}</p>
+    <h3 class="karta__nazev"><a href="{{ url('eshop/produkt/' ~ p.slug) }}">{{ p.nazev|cz }}</a></h3>
+    {% if p.kratky_popis %}<p class="karta__popis">{{ p.kratky_popis|cz }}</p>{% endif %}
+    <div class="karta__pata">
+      <p class="cena{% if p.cena_puvodni %} cena--akce{% endif %}">{% if p.varianty|length > 1 %}<small>od </small>{% endif %}{{ cena0|kc }}{% if p.cena_puvodni %} <s>{{ p.cena_puvodni|kc }}</s>{% endif %}</p>
+      <button type="button" class="karta__pridat" data-pridat='{{ polozka|tojson }}' aria-label="Přidat do košíku: {{ p.nazev }}{% if v0 %}, {{ v0.nazev }}{% endif %}">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+      </button>
+    </div>
+  </div>
+</article>

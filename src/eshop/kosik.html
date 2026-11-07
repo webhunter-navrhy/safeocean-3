@@ -1,0 +1,84 @@
+{% extends "_eshop.html" %}
+{% set titulek = "Košík | E-shop Safe Ocean" %}
+{% set cesta = "eshop/kosik/" %}
+{% set noindex = True %}
+{% set dopravy = [
+  {"id": "osobni", "nazev": "Osobní odběr – Praha 3", "popis": site.kontakt.adresa.ulice ~ ", po domluvě termínu", "cena": 0, "zive": True},
+  {"id": "rozvoz", "nazev": "Rozvoz po Praze", "popis": "Živé zboží v termostatickém boxu, termín domluvíme", "cena": 190, "zive": True},
+  {"id": "zasilkovna", "nazev": "Zásilkovna – výdejní místo", "popis": "Jen suché zboží, doručení do 2 pracovních dnů", "cena": 89, "zive": False},
+  {"id": "ppl", "nazev": "PPL – na adresu", "popis": "Jen suché zboží, doručení do 2 pracovních dnů", "cena": 139, "zive": False}
+] %}
+{% set platby = [
+  {"id": "prevod", "nazev": "Bankovní převod / QR platba", "popis": "Platební údaje a QR kód pošleme e-mailem", "jen_osobni": False},
+  {"id": "karta", "nazev": "Platba kartou online", "popis": "Přes platební bránu", "jen_osobni": False},
+  {"id": "hotove", "nazev": "Hotově nebo kartou při odběru", "popis": "Jen při osobním odběru", "jen_osobni": True}
+] %}
+{% block obsah %}
+<div class="wrap" data-kosik data-dopravy='{{ dopravy|tojson }}' data-platby='{{ platby|tojson }}'>
+  <nav class="drobky" aria-label="Drobečková navigace"><a href="{{ url('eshop') }}">E-shop</a><span aria-hidden="true">/</span><span>Košík</span></nav>
+  <header class="podhlava"><h1>Košík</h1></header>
+
+  <div class="prazdne" data-kosik-prazdny hidden>
+    <p>{{ "Košík je prázdný."|cz }}</p>
+    <p><a class="tl tl--plne" href="{{ url('eshop') }}">Do e-shopu</a></p>
+  </div>
+
+  <form class="kosik" data-kosik-obsah hidden novalidate>
+    <div>
+      <ul class="kosik__polozky" data-kosik-seznam></ul>
+      <p class="pozn-ram" data-ziva-pozn hidden style="margin-top:20px">{{ "V košíku je živé nebo mražené zboží. To předáváme jen osobně v Praze 3 nebo rozvozem po Praze, proto jsou ostatní způsoby dopravy vypnuté."|cz }}</p>
+
+      <div class="pokladna">
+        <section>
+          <h2>Doprava</h2>
+          <div class="volba-radek">
+            {% for d in dopravy %}
+            <label class="volba" data-doprava="{{ d.id }}"><input type="radio" name="doprava" value="{{ d.id }}"{% if loop.first %} checked{% endif %}><span><b>{{ d.nazev }}</b><small>{{ d.popis|cz }}</small></span><span>{% if d.cena %}{{ d.cena|kc }}{% else %}zdarma{% endif %}</span></label>
+            {% endfor %}
+          </div>
+        </section>
+        <section>
+          <h2>Platba</h2>
+          <div class="volba-radek">
+            {% for p in platby %}
+            <label class="volba" data-platba="{{ p.id }}"><input type="radio" name="platba" value="{{ p.id }}"{% if loop.first %} checked{% endif %}><span><b>{{ p.nazev }}</b><small>{{ p.popis|cz }}</small></span><span>zdarma</span></label>
+            {% endfor %}
+          </div>
+        </section>
+        <section>
+          <h2>Kontaktní údaje</h2>
+          <div class="formular" style="background:none;padding:0">
+            <div class="formular__radek">
+              <label class="pole">Jméno a příjmení <input name="jmeno" autocomplete="name" required></label>
+              <label class="pole">Telefon <input name="telefon" type="tel" autocomplete="tel" required></label>
+            </div>
+            <label class="pole">E-mail <input name="email" type="email" autocomplete="email" required></label>
+            <div data-adresa hidden>
+              <label class="pole">Adresa doručení <input name="adresa" autocomplete="street-address" placeholder="Ulice a číslo, PSČ, město"></label>
+            </div>
+            <label class="pole">Poznámka <textarea name="poznamka" rows="3" placeholder="Např. preferovaný termín odběru"></textarea></label>
+          </div>
+        </section>
+      </div>
+    </div>
+    <aside class="souhrn" aria-label="Souhrn objednávky">
+      <h2>Souhrn</h2>
+      <div class="souhrn__radek"><span>Zboží</span><span data-s="zbozi">0 Kč</span></div>
+      <div class="souhrn__radek"><span>Doprava</span><span data-s="doprava">zdarma</span></div>
+      <div class="souhrn__radek souhrn__celkem"><span>Celkem s DPH</span><span data-s="celkem">0 Kč</span></div>
+      <button type="submit" class="tl tl--plne tl--sirka">Odeslat objednávku</button>
+      <p class="male">{{ "Odesláním souhlasíte s obchodními podmínkami. Tohle je návrh e-shopu – objednávka se nikam neodešle."|cz }} <a href="{{ url('eshop/obchodni-podminky') }}">Obchodní podmínky</a></p>
+      <p class="male" data-chyba role="alert" style="color:var(--cervena)"></p>
+    </aside>
+  </form>
+
+  <section class="potvrzeni" data-hotovo hidden tabindex="-1" style="margin-bottom:var(--sekce)">
+    <div>
+      <h2>{{ "Děkujeme, objednávka je přijatá"|cz }}</h2>
+      <p data-hotovo-text></p>
+      <p class="male">{{ "Ukázka: v návrhu webu se objednávka nikam neodesílá a košík se jen vyprázdní."|cz }}</p>
+      <p style="margin-top:1rem"><a class="tl" href="{{ url('eshop') }}">Zpět do e-shopu</a></p>
+    </div>
+  </section>
+</div>
+{% endblock %}

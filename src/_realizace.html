@@ -1,0 +1,51 @@
+{% extends "_base.html" %}
+{% set titulek = r.nazev ~ " – " ~ r.typ ~ " akvárium " ~ r.litru ~ " l | Safe Ocean" %}
+{% set popis = r.perex %}
+{% set cesta = "realizace/" ~ r.slug ~ "/" %}
+{% block obsah %}
+<div class="podtma podtma--foto">
+<div class="wrap">
+  <nav class="drobky" aria-label="Drobečková navigace"><a href="{{ url('') }}">Úvod</a><span aria-hidden="true">/</span><a href="{{ url('realizace') }}">Realizace</a><span aria-hidden="true">/</span><span>{{ r.nazev }}</span></nav>
+  <header class="podhlava">
+    <h1>{{ r.nazev|cz }}</h1>
+    <p class="perex">{{ r.perex|cz }}</p>
+  </header>
+</div>
+</div>
+<div class="wrap podtma__foto">
+  <figure class="rd__hero">{{ img(r.fotky[0], alt=r.alt, sizes="(min-width: 1360px) 1280px, 100vw", eager=True) }}</figure>
+  <div class="rd__obsah">
+    <div>
+      {% for t in r.text %}<p{% if loop.first %} class="perex"{% endif %}>{{ t|cz }}</p>{% endfor %}
+      <h2>{{ r.reseni_nadpis|cz }}</h2>
+      <p>{{ r.reseni|cz }}</p>
+    </div>
+    <aside class="karta-udaje">
+      <table class="parametry"><tbody>
+        <tr><th scope="row">Typ</th><td>{{ r.typ }}</td></tr>
+        <tr><th scope="row">Objem</th><td>{{ r.litru|replace(" ", " ") }}&nbsp;l</td></tr>
+        <tr><th scope="row">Prostor</th><td>{{ r.prostor }}</td></tr>
+        <tr><th scope="row">Rok</th><td>{{ r.rok }}</td></tr>
+      </tbody></table>
+      <p style="margin-top:20px"><a class="tl tl--plne tl--sirka" href="{{ url('akvaria-na-miru') }}#poptavka">Chci podobné akvárium</a></p>
+    </aside>
+  </div>
+  <div class="rd__galerie">
+    {% for f in r.fotky[1:] %}<figure>{{ img(f, alt=r.nazev ~ " – fotka " ~ (loop.index + 1), sizes=("(min-width: 900px) 62vw, 100vw" if loop.first else "(min-width: 900px) 30vw, 50vw")) }}</figure>{% endfor %}
+  </div>
+</div>
+{% set dalsi = data.realizace|rejectattr("slug", "eq", r.slug)|list %}
+<section class="sekce sekce--seda" aria-labelledby="dalsi-h">
+  <div class="wrap">
+    <div class="sekce-hlava"><div><h2 id="dalsi-h">Další realizace</h2></div><a class="sipka" href="{{ url('realizace') }}">Všechny realizace</a></div>
+    <div class="mrizka mrizka--3">
+      {% for x in dalsi[:3] %}
+      <a class="real" href="{{ url('realizace/' ~ x.slug) }}">
+        <span class="real__foto">{{ img(x.fotky[0], alt=x.alt, sizes="(min-width: 760px) 30vw, 50vw") }}</span>
+        <span class="real__popis"><b>{{ x.nazev|cz }}</b><span>{{ x.litru }}&nbsp;l · {{ x.rok }}</span></span>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

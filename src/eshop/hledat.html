@@ -1,0 +1,11 @@
+{% extends "_eshop.html" %}
+{% set titulek = "Hledání | E-shop Safe Ocean" %}
+{% set cesta = "eshop/hledat/" %}
+{% set noindex = True %}
+{% block obsah %}
+<div class="wrap">
+  <nav class="drobky" aria-label="Drobečková navigace"><a href="{{ url('eshop') }}">E-shop</a><span aria-hidden="true">/</span><span>Hledání</span></nav>
+  <header class="podhlava"><h1>Celý sortiment</h1><p>{{ "Hledejte podle názvu, značky, latinského jména nebo druhu zboží."|cz }}</p></header>
+  {% with produkty = data.produkty, aktivni = "", svet = none %}{% include "_vypis.html" %}{% endwith %}
+</div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "_eshop.html" %}
+{% set titulek = "Značky | E-shop Safe Ocean" %}
+{% set popis = "Značky akvaristické a teraristické techniky, krmiv a péče o vodu v e-shopu Safe Ocean." %}
+{% set cesta = "eshop/znacky/" %}
+{% block obsah %}
+<div class="wrap">
+  <nav class="drobky" aria-label="Drobečková navigace"><a href="{{ url('eshop') }}">E-shop</a><span aria-hidden="true">/</span><span>Značky</span></nav>
+  <header class="podhlava"><h1>Značky</h1><p>{{ "Technika, krmiva a přípravky od výrobců, se kterými máme dlouhodobou zkušenost z akvárií našich klientů."|cz }}</p></header>
+  <nav class="abeceda" aria-label="Značky podle abecedy">
+    {% for z, ps in data.znacky %}<a href="#{{ z|slug }}">{{ z }}</a>{% endfor %}
+  </nav>
+  {% for z, ps in data.znacky %}
+  <section class="znacka-blok" id="{{ z|slug }}" aria-labelledby="z-{{ z|slug }}">
+    <div class="znacka-blok__hlava"><h2 id="z-{{ z|slug }}">{{ z }}</h2><span>{{ ps|length }} {% if ps|length == 1 %}produkt{% elif 2 <= ps|length <= 4 %}produkty{% else %}produktů{% endif %}</span></div>
+    <div class="mrizka">{% for p in ps %}{% include "_produkt_karta.html" %}{% endfor %}</div>
+  </section>
+  {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "_eshop.html" %}
+{% set titulek = "Výprodej | E-shop Safe Ocean" %}
+{% set popis = "Akvaristické a teraristické zboží ve slevě, dokud nedojdou zásoby." %}
+{% set cesta = "eshop/vyprodej/" %}
+{% block obsah %}
+<div class="wrap">
+  <nav class="drobky" aria-label="Drobečková navigace"><a href="{{ url('eshop') }}">E-shop</a><span aria-hidden="true">/</span><span>Výprodej</span></nav>
+  <header class="podhlava"><h1>Výprodej</h1><p>{{ "Zboží ve slevě, dokud nedojdou zásoby. Vystavené kusy a doprodej starších řad – vše nové a se zárukou."|cz }}</p></header>
+  <p class="ukazka-pozn"><b>Návrh</b><span>{{ "Slevy jsou ukázkové, skutečný výprodej doplní Safe Ocean."|cz }}</span></p>
+  {% with produkty = data.vyprodej, aktivni = "", svet = none %}{% include "_vypis.html" %}{% endwith %}
+</div>
+{% endblock %}
