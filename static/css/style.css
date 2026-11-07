@@ -696,7 +696,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 .kosik-odkaz--ikona { margin-left: 0; padding: 0 6px; }
 .kosik-odkaz--ikona .kosik-pocet { position: absolute; top: 2px; right: -6px; min-width: 18px; height: 18px; font-size: .68rem; padding: 0 5px; }
 @media (max-width: 1023px) {
-  .eshop-odkaz { margin-left: auto; min-height: 38px; padding: 0 10px 0 12px; font-size: .9rem; }
+  .eshop-odkaz { margin-left: auto; min-height: 42px; padding: 0 10px 0 12px; font-size: .9rem; }
   .kosik-odkaz.kosik-odkaz--ikona { margin-left: 0; }
 }
 @media (max-width: 360px) { .eshop-odkaz svg { display: none; } }
@@ -900,3 +900,6 @@ ul { margin: 0; padding: 0; list-style: none; }
 .poukaz__typ { color: rgba(255,255,255,.7); margin: 0; }
 .poukaz__hodnota { font-size: clamp(2.2rem, 5vw, 3.8rem); letter-spacing: -0.04em; line-height: 1; margin: 0; align-self: end; font-variant-numeric: tabular-nums; }
 @media (max-width: 899px) { .poukaz__karta { position: static; } }
+
+.mobmenu__kontakt { line-height: 1.4; }
+.mobmenu__kontakt a { display: inline-flex; align-items: center; min-height: 42px; }
