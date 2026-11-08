@@ -57,3 +57,6 @@ Písmo: Host Grotesk (font jejich starého webu i loga) + Fragment Mono pro drob
 Skladba úvodu: video hero → manifest velkým písmem → tři druhy (mořské / sladkovodní / terária) jako vysoké svítící nádrže → projekty (01)–(05) asymetricky velké → jak to probíhá → servis přes celou šířku s Václavem → architekti → FAQ → kontakt.
 E-shop: tmavě modrá hlavička, lišta světů a mega menu, úvod e-shopu jako tmavý pás se zářícími světy; produkty na světlém (klid, čitelnost), ale modrá tlačítka, modře tónované plochy fotek, zlaté štítky výprodeje, stejná tmavá patička.
 Zakázané vzory: číslování (01)–(05) jen u projektů (je z jejich starého webu), indikátor scrollu v hero zrušen.
+
+## Kolo 4 (8. 11.)
+Sekce bez šablon: každá sekce jiná interakce (obří slova + fotka přes celou plochu, skládané karty projektů, body na fotce, slova jako záložky, servis přes celou šířku, světlá „galerie“ pro architekty). E-shop úvod = rozšiřující se nádrže světů. Detaily v pripominky/2026-11-08-kolo4.md.
