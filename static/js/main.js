@@ -403,7 +403,19 @@
   var svety = $('[data-svety]');
   if (svety) {
     var sv = $$('[data-svet]', svety);
-    var aktivuj = function (li) { sv.forEach(function (x) { x.classList.toggle('je-aktivni', x === li); }); };
+    var dotahni = function () {
+      $$('img[data-srcset]', svety).forEach(function (im) {
+        im.setAttribute('srcset', im.getAttribute('data-srcset')); im.removeAttribute('data-srcset');
+        im.setAttribute('src', im.getAttribute('data-src')); im.removeAttribute('data-src');
+      });
+    };
+    svety.addEventListener('pointerenter', dotahni, { once: true });
+    svety.addEventListener('focusin', dotahni, { once: true });
+    if (!window.matchMedia('(min-width: 900px)').matches && 'IntersectionObserver' in window) {
+      var ioS = new IntersectionObserver(function (z) { if (z[0].isIntersecting) { dotahni(); ioS.disconnect(); } }, { rootMargin: '300px 0px' });
+      ioS.observe(svety);
+    }
+    var aktivuj = function (li) { dotahni(); sv.forEach(function (x) { x.classList.toggle('je-aktivni', x === li); }); };
     sv.forEach(function (li) {
       var a = $('a', li);
       li.addEventListener('mouseenter', function () { aktivuj(li); });

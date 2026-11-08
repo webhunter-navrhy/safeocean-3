@@ -55,7 +55,7 @@
       {% for n, t, f, alt, h in svety_st %}
       <li class="svet-st{% if loop.first %} je-aktivni{% endif %}" data-svet>
         <a href="{{ url(h) }}"><span class="svet-st__jm">{{ n|cz }}</span><span class="svet-st__popis">{{ t|cz }}</span></a>
-        <span class="svet-st__foto">{{ img(f, alt=alt, sizes="100vw") }}</span>
+        <span class="svet-st__foto">{% if loop.first %}{{ img(f, alt=alt, sizes="100vw") }}{% else %}{{ img(f, alt=alt, sizes="100vw")|string|replace(" srcset=", " data-srcset=")|replace(" src=", " src=\"data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\" data-src=")|safe }}{% endif %}</span>
       </li>
       {% endfor %}
     </ul>

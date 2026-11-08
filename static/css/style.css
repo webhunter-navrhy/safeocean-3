@@ -1528,3 +1528,6 @@ body.eshop main { background: var(--pozadi-eshop); }
   .eshop-pruh li { display: block; }
   .eshop-pruh li::before { display: inline-block; margin-right: .6em; vertical-align: middle; }
 }
+
+/* větší dotykové body na fotce (mobil) */
+@media (max-width: 899px) { .body4 button { width: 44px; height: 44px; padding: 0; justify-content: center; background: transparent; box-shadow: none; backdrop-filter: none; } }
