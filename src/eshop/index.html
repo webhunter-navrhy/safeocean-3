@@ -11,24 +11,24 @@
       <h1>{{ "E-shop pro akvaristy a teraristy"|cz }}</h1></div>
       <p class="perex">{{ "Vybíráme to, co sami používáme u akvárií a terárií našich klientů. Živé zboží si můžete prohlédnout a vyzvednout osobně v Praze 3."|cz }}</p>
     </div>
-    <div class="svety">
+    <div class="nadrze" data-nadrze>
       {% for s in data.svety %}
-      <article class="svet-karta">
-        <a class="svet-karta__foto" href="{{ url('eshop/' ~ s.slug) }}" tabindex="-1" aria-hidden="true">{% if s.foto %}{{ img(s.foto, alt="", sizes="(min-width: 1100px) 25vw, (min-width: 640px) 50vw, 100vw", eager=loop.index <= 2) }}{% endif %}</a>
-        <div class="svet-karta__telo">
+      <article class="nadrz-p{% if loop.first %} je-aktivni{% endif %}" data-nadrz-p>
+        <span class="nadrz-p__foto">{% if s.foto %}{{ img(s.foto, alt="", sizes="(min-width: 900px) 60vw, 100vw", eager=loop.index <= 2) }}{% endif %}</span>
+        <span class="nadrz-p__svisle" aria-hidden="true">{{ s.nazev }}</span>
+        <div class="nadrz-p__telo">
+          <span class="nadrz-p__pocet">{{ polozek(s.produkty|length) }} · {% set nk = s.kategorie|length %}{{ nk }} {{ 'sekce' if 2 <= nk <= 4 else 'sekcí' }}</span>
           <h2><a href="{{ url('eshop/' ~ s.slug) }}">{{ s.nazev }}</a></h2>
-          <ul>{% for k in s.kategorie[:5] %}<li><a href="{{ url('eshop/' ~ s.slug ~ '/' ~ k.slug) }}">{{ k.kratce or k.nazev }}</a></li>{% endfor %}</ul>
-          <a class="sipka" href="{{ url('eshop/' ~ s.slug) }}">{% if s.kategorie|length > 5 %}{% set zb = s.kategorie|length - 5 %}{% if zb == 1 %}a ještě 1 sekce{% elif zb <= 4 %}a další {{ zb }} sekce{% else %}a dalších {{ zb }} sekcí{% endif %}{% else %}{{ polozek(s.produkty|length) }}{% endif %}</a>
+          <ul>{% for k in s.kategorie[:6] %}<li><a href="{{ url('eshop/' ~ s.slug ~ '/' ~ k.slug) }}">{{ k.kratce or k.nazev }}</a></li>{% endfor %}</ul>
         </div>
       </article>
       {% endfor %}
     </div>
-    <ul class="vyhody vyhody--eshop">
-    <li><b>Osobní odběr v&nbsp;Praze&nbsp;3</b><span>{{ "Živé a mražené zboží osobně nebo rozvozem po Praze."|cz }}</span></li>
-    <li><b>Suché zboží po celé ČR</b><span>{{ "Zásilkovna nebo PPL do 2 pracovních dnů."|cz }}</span></li>
-    <li><b>Poradíme s výběrem</b><span>{{ "Jestli se druh hodí k vašim obyvatelům i k vaší vodě."|cz }}</span></li>
-    <li><b>Instalace a servis</b><span>{{ "Techniku vám zapojíme, akvárium i terárium postavíme na míru."|cz }}</span></li>
-  </ul>
+    <ul class="eshop-pruh">
+      <li><b>Osobní odběr v&nbsp;Praze&nbsp;3</b> {{ "živé a mražené zboží i rozvozem po Praze"|cz }}</li>
+      <li><b>Suché zboží po celé ČR</b> {{ "Zásilkovna nebo PPL do 2 dnů"|cz }}</li>
+      <li><b>Poradíme s výběrem</b> {{ "podle obyvatel i vaší vody"|cz }}</li>
+    </ul>
   </div>
 </section>
 

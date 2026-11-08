@@ -32,116 +32,130 @@
   </div>
 </section>
 
-<section class="manifest" id="o-nas" aria-label="O nás">
-  <div class="wrap">
+<section class="osobne" id="o-nas" aria-labelledby="osobne-h">
+  <figure class="osobne__foto">{{ img("f/vaclav-husa-2.jpg", alt="Václav Husa, Safe Ocean, u mořského akvária", sizes="(min-width: 900px) 50vw, 100vw") }}</figure>
+  <div class="osobne__text">
     <span class="ramecek">O nás</span>
-    <p class="manifest__text">{{ "V Safe Ocean vytváříme akvária na míru s důrazem na detail, estetiku i dlouhodobou spolehlivost."|cz }} <span>{{ "Nesoustředíme se jen na výrobu – řešíme celý proces od návrhu přes instalaci až po pravidelný servis."|cz }}</span></p>
-    <ul class="vyhody">
-      <li><b>Od návrhu po servis</b><span>{{ "Celý proces řešíme sami, včetně pravidelné péče."|cz }}</span></li>
-      <li><b>Mořská i sladkovodní</b><span>{{ "Poradíme s typem akvária i výběrem živočichů."|cz }}</span></li>
-      <li><b>Sehneme i vzácné druhy</b><span>{{ "Živočichy na přání vybíráme tak, aby spolu dobře žili."|cz }}</span></li>
-      <li><b>Pro domácnosti i firmy</b><span>{{ "Byty, rodinné domy, kanceláře i recepce."|cz }}</span></li>
+    <h2 id="osobne-h" class="osobne__h">{{ "Děláme věci tak, aby stály za to."|cz }}</h2>
+    <p class="osobne__perex">{{ "Akvária na míru stavíme s důrazem na detail, estetiku i dlouhodobou spolehlivost. Neřešíme jen výrobu – celý proces vedeme od návrhu přes instalaci až po pravidelný servis. A živočicha vám seženeme i podle přání."|cz }}</p>
+    <p class="osobne__podpis"><b>Václav Husa</b><span>Safe Ocean, Praha 3</span></p>
+  </div>
+</section>
+
+<section class="svety-st" data-svety aria-labelledby="svety-h">
+  <div class="wrap svety-st__in">
+    <h2 id="svety-h" class="svety-st__nadpis">Co stavíme</h2>
+    <ul class="svety-st__seznam">
+      {% set svety_st = [
+        ("Mořská akvária", "Korálový útes, ryby a bezobratlí. Nejvíc barev, nejvíc péče – o obojí se postaráme.", "f/utes-siroky.jpg", "Mořské akvárium s korálovým útesem", "akvaria-na-miru#typy"),
+        ("Sladkovodní", "Rostliny, terče a hejna. Klid a přirozená elegance, která se hodí domů i do kanceláře.", "f/terce-chodba.jpg", "Sladkovodní akvárium s terči v chodbě", "akvaria-na-miru#typy"),
+        ("Terária", "Prales za sklem: rostliny, kořeny, mlha a osvětlení s UVB pro plazy i obojživelníky.", "f/terarium.jpg", "Pralesní terárium s rostlinami a kořeny", "akvaria-na-miru#typy"),
+        ("Pro firmy", "Recepce, lobby a zasedačky. Akvárium, které zaujme při každé schůzce – servis řešíme za vás.", "f/lobby-vaclav.jpg", "Sladkovodní akvárium v lobby firmy", "akvaria-na-miru#umisteni")
+      ] %}
+      {% for n, t, f, alt, h in svety_st %}
+      <li class="svet-st{% if loop.first %} je-aktivni{% endif %}" data-svet>
+        <a href="{{ url(h) }}"><span class="svet-st__jm">{{ n|cz }}</span><span class="svet-st__popis">{{ t|cz }}</span></a>
+        <span class="svet-st__foto">{{ img(f, alt=alt, sizes="100vw") }}</span>
+      </li>
+      {% endfor %}
     </ul>
   </div>
 </section>
 
-<section class="druhy" aria-labelledby="druhy-h">
-  <div class="wrap">
-    <h2 id="druhy-h" class="sr">Co stavíme</h2>
-    <div class="druhy__rada">
-      <a class="druh" href="{{ url('akvaria-na-miru') }}#typy">
-        <span class="nadrz druh__foto">{{ img("f/morske-ostruvek.jpg", alt="Mořské akvárium s korálovým útesem v samostatném sloupu", sizes="(min-width: 900px) 34vw, 100vw") }}</span>
-        <span class="druh__t"><b>Mořská akvária</b><span>{{ "Korály, ryby a bezobratlí. Nejvíc barev, nejvíc péče – postaráme se o obojí."|cz }}</span></span>
-      </a>
-      <a class="druh" href="{{ url('akvaria-na-miru') }}#typy">
-        <span class="nadrz druh__foto">{{ img("f/terce-rostliny.jpg", alt="Sladkovodní akvárium s terči mezi rostlinami", sizes="(min-width: 900px) 34vw, 100vw") }}</span>
-        <span class="druh__t"><b>Sladkovodní akvária</b><span>{{ "Rostliny, terče a hejna. Klid a přirozená elegance pro domov."|cz }}</span></span>
-      </a>
-      <a class="druh" href="{{ url('akvaria-na-miru') }}#umisteni">
-        <span class="nadrz druh__foto">{{ img("f/ekvator.jpg", alt="Mořské akvárium v klientské zóně firmy", sizes="(min-width: 900px) 34vw, 100vw") }}</span>
-        <span class="druh__t"><b>Pro firmy a recepce</b><span>{{ "Akvárium, které zaujme při každé schůzce. Servis řešíme za vás."|cz }}</span></span>
-      </a>
-    </div>
+<section class="projekty4" aria-labelledby="real-h">
+  <div class="wrap projekty4__hlava">
+    <h2 id="real-h">Projekty</h2>
+    <p>{{ "Výběr z akvárií, která jsme navrhli, postavili a zprovoznili."|cz }}</p>
+    <a class="sipka" href="{{ url('realizace') }}">Všechny realizace</a>
+  </div>
+  <div class="wrap projekty4__balicek">
+    {% set poradi = ['kancelar-co-zaujme','obyvaci-stena','lobby-firmy','klid-domova','akvarium-v-panelovem-dome'] %}
+    {% set fotky_p = {'kancelar-co-zaujme': 'r/kancelar-1.jpg', 'obyvaci-stena': 'r/stena-2.jpg', 'lobby-firmy': 'r/lobby-2.jpg', 'klid-domova': 'r/domov-2.jpg', 'akvarium-v-panelovem-dome': 'r/panelak-1.jpg'} %}
+    {% for slug in poradi %}{% set i = loop.index %}{% for r in data.realizace if r.slug == slug %}
+    <a class="karta-p" href="{{ url('realizace/' ~ r.slug) }}" style="--i: {{ i }}">
+      <span class="karta-p__foto">{{ img(fotky_p[slug], alt=r.alt, sizes="(min-width: 1400px) 1320px, 100vw") }}</span>
+      <span class="karta-p__nahore"><i>(0{{ i }})</i><span>{{ r.prostor }} · {{ r.rok }}</span></span>
+      <span class="karta-p__dole">
+        <span class="karta-p__jm"><b>{{ r.nazev|cz }}</b><span>{{ r.perex|cz }}</span></span>
+        <span class="karta-p__litry">{{ r.litru|replace(" ", " ") }}<small>litrů · {{ r.typ|lower }}</small></span>
+      </span>
+    </a>
+    {% endfor %}{% endfor %}
   </div>
 </section>
 
-<section class="sekce projekty" aria-labelledby="real-h">
+<section class="namiru4" aria-labelledby="studio-h">
   <div class="wrap">
-    <div class="projekty__hlava">
-      <h2 id="real-h">Projekty</h2>
-      <a class="sipka" href="{{ url('realizace') }}">Všechny realizace</a>
+    <div class="namiru4__hlava">
+      <h2 id="studio-h">{{ "Součást interiéru, ne doplněk"|cz }}</h2>
+      <p>{{ "Každé akvárium navrhujeme pro konkrétní místo. Rozměry, obklad i osvětlení ladíme s architekturou, technika zůstává skrytá a tichá. Jak to vypadá v praxi, ukazuje obývací stěna s mořským akváriem 1 000 litrů:"|cz }}</p>
     </div>
-    <div class="projekty__mrizka">
-      {% set poradi = ['kancelar-co-zaujme','akvarium-v-panelovem-dome','klid-domova','obyvaci-stena','lobby-firmy'] %}
-      {% set velikosti = ["(min-width: 900px) 58vw, 100vw", "(min-width: 900px) 40vw, 100vw", "(min-width: 900px) 40vw, 100vw", "(min-width: 900px) 58vw, 100vw", "100vw"] %}
-      {% for slug in poradi %}{% set i = loop.index %}{% for r in data.realizace if r.slug == slug %}
-      <a class="projekt projekt--{{ i }}" href="{{ url('realizace/' ~ r.slug) }}">
-        <span class="nadrz projekt__foto">{{ img(r.fotky[0], alt=r.alt, sizes=velikosti[i - 1]) }}</span>
-        <span class="projekt__popis"><i>(0{{ i }})</i><b>{{ r.nazev|cz }}</b><span>{{ r.typ }} · {{ r.litru|replace(" ", " ") }}&nbsp;l · {{ r.rok }}</span></span>
-      </a>
-      {% endfor %}{% endfor %}
-    </div>
-  </div>
-</section>
-
-<section class="sekce studio3" aria-labelledby="studio-h">
-  <div class="wrap">
-    <div class="studio3__hlava">
-      <span class="stitek">Akvárium na míru</span>
-      <h2 id="studio-h">{{ "Akvárium, které je součástí interiéru, ne doplňkem"|cz }}</h2>
-      <p>{{ "Každé akvárium navrhujeme tak, aby zapadlo do interiéru a bylo zároveň snadno udržovatelné. Rozměry, obklad i osvětlení ladíme s architekturou prostoru, technika zůstává skrytá a tichá."|cz }}</p>
-    </div>
-    <dl class="pilire3">
-      <div><dt>Design</dt><dd>{{ "Tvary, rozměry, obklady i osvětlení podle architektury prostoru."|cz }}</dd></div>
-      <div><dt>Materiály</dt><dd>{{ "Sklo s vysokou pevností, precizní spoje, konstrukce na míru."|cz }}</dd></div>
-      <div><dt>Bezpečnost</dt><dd>{{ "Statika, nosnost podlahy a dlouhodobé zatížení řešíme od začátku."|cz }}</dd></div>
-      <div><dt>Skrytá technika</dt><dd>{{ "Technologie pracují tiše v pozadí, často v sousední místnosti."|cz }}</dd></div>
-    </dl>
-    <div class="postup3">
-      <h3 class="postup3__h">Jak to probíhá</h3>
-      <ol class="kroky3">
-        <li><b>Konzultace</b><span>{{ "Prohlédneme prostor a probereme, jaké akvárium chcete."|cz }}</span></li>
-        <li><b>Návrh</b><span>{{ "Rozměry, pohledové osy, statika a umístění techniky."|cz }}</span></li>
-        <li><b>Výroba</b><span>{{ "Akvárium, skříň i obklady vyrábíme na míru prostoru."|cz }}</span></li>
-        <li><b>Instalace a spuštění</b><span>{{ "Doprava, montáž a záběh. Čistě, tiše, s respektem k prostoru."|cz }}</span></li>
-        <li><b>Servis</b><span>{{ "Pravidelná péče, aby akvárium zůstalo stabilní a krásné."|cz }}</span></li>
+    <figure class="namiru4__obraz">
+      {{ img("r/stena-1.jpg", alt="Mořské akvárium 1 000 litrů zapuštěné do knihovny z dubových trámů", sizes="(min-width: 1400px) 1320px, 100vw") }}
+      <ol class="body4">
+        <li style="--x: 26%; --y: 47%"><button type="button" aria-expanded="false"><b>Design</b></button><span>{{ "Tvar, rozměr i obklad podle architektury – tady dubové trámy knihovny."|cz }}</span></li>
+        <li style="--x: 55%; --y: 25%"><button type="button" aria-expanded="false"><b>Skrytá technika</b></button><span>{{ "Osvětlení v krytu, filtrace a odpěňovač mimo dohled, často v sousední místnosti."|cz }}</span></li>
+        <li style="--x: 64%; --y: 41%"><button type="button" aria-expanded="false"><b>Materiály</b></button><span>{{ "Sklo s vysokou pevností a precizní spoje, konstrukce na míru."|cz }}</span></li>
+        <li style="--x: 47%; --y: 64%"><button type="button" aria-expanded="false"><b>Bezpečnost</b></button><span>{{ "Statiku, nosnost podlahy i dlouhodobé zatížení řešíme od začátku."|cz }}</span></li>
       </ol>
-      <div class="uvod__akce">
-        <a class="tl tl--plne" href="{{ url('akvaria-na-miru') }}">Akvária na míru</a>
-        <a class="tl tl--svetle" href="{{ url('akvaria-na-miru') }}#kalkulacka">Spočítat objem a zátěž</a>
+    </figure>
+    <ol class="body4-seznam" aria-hidden="true">
+      <li><b>Design</b><span>{{ "Tvar, rozměr i obklad podle architektury – tady dubové trámy knihovny."|cz }}</span></li>
+      <li><b>Skrytá technika</b><span>{{ "Osvětlení v krytu, filtrace a odpěňovač mimo dohled, často v sousední místnosti."|cz }}</span></li>
+      <li><b>Materiály</b><span>{{ "Sklo s vysokou pevností a precizní spoje, konstrukce na míru."|cz }}</span></li>
+      <li><b>Bezpečnost</b><span>{{ "Statiku, nosnost podlahy i dlouhodobé zatížení řešíme od začátku."|cz }}</span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="cesta4" data-cesta aria-labelledby="cesta-h">
+  <div class="wrap">
+    <h2 id="cesta-h" class="cesta4__h">Jak to probíhá</h2>
+    {% set kroky = [
+      ("Konzultace", "Přijedeme, prohlédneme prostor a probereme, jaké akvárium chcete – mořské, sladkovodní, nebo terárium.", "f/vaclav-husa.jpg", "Václav Husa u mořského akvária v domě klienta"),
+      ("Návrh", "Rozměry, pohledové osy, statika a umístění techniky. Ladíme s vámi i s architektem.", "r/domov-1.jpg", "Jídelna se dvěma akvárii navrženými do interiéru"),
+      ("Výroba", "Akvárium, skříň i obklady vyrábíme na míru prostoru. Techniku vybíráme podle obyvatel.", "r/kancelar-2.jpg", "Hotové mořské akvárium na míru v kanceláři"),
+      ("Instalace", "Doprava, montáž a záběh. Čistě, tiše a s respektem k prostoru. Živočichy nasazujeme postupně.", "r/kancelar-7.jpg", "Instalace techniky nad mořským akváriem"),
+      ("Servis", "Pravidelná péče, aby akvárium zůstalo stabilní a krásné. Vy se jen díváte.", "f/servis-led-2.jpg", "Servis mořského akvária – kontrola osvětlení")
+    ] %}
+    <ol class="cesta4__slova" role="tablist">
+      {% for n, t, f, alt in kroky %}<li><button type="button" role="tab" id="krok-{{ loop.index }}" aria-controls="krok-p-{{ loop.index }}" aria-selected="{{ 'true' if loop.first else 'false' }}"{% if not loop.first %} tabindex="-1"{% endif %}>{{ n }}</button></li>{% endfor %}
+    </ol>
+    <div class="cesta4__panely">
+      {% for n, t, f, alt in kroky %}
+      <div class="cesta4__panel" role="tabpanel" id="krok-p-{{ loop.index }}" aria-labelledby="krok-{{ loop.index }}"{% if not loop.first %} hidden{% endif %}>
+        <div class="cesta4__text"><i>0{{ loop.index }} / 05</i><p>{{ t|cz }}</p>{% if loop.last %}<a class="sipka" href="{{ url('servis') }}">Více o servisu</a>{% elif loop.first %}<a class="sipka" href="#kontakt">Domluvit konzultaci</a>{% endif %}</div>
+        <figure class="cesta4__foto">{{ img(f, alt=alt, sizes="(min-width: 900px) 58vw, 100vw") }}</figure>
       </div>
+      {% endfor %}
     </div>
   </div>
 </section>
 
-<section class="servis3" aria-labelledby="servis-h">
-  <figure class="servis3__foto">{{ img("f/servis-zebrik-2.jpg", alt="Václav Husa při servisu mořského akvária – kontrola techniky pod osvětlením", sizes="100vw") }}</figure>
-  <div class="wrap servis3__in">
-    <div class="servis3__panel">
-      <span class="stitek">Servis</span>
-      <h2 id="servis-h">{{ "Péče o akvárium bez starostí"|cz }}</h2>
-      <p>{{ "I to nejkrásnější akvárium potřebuje odbornou péči. Servis zajišťuje dlouhodobou stabilitu, zdraví živočichů a bezproblémový chod. Probíhá diskrétně a profesionálně – vy si užíváte výsledek, my se staráme o vše ostatní."|cz }}</p>
-      <ul class="servis-seznam">
-        <li><b>Pravidelná údržba</b><span>{{ "čištění skel, dekorací a techniky"|cz }}</span></li>
-        <li><b>Kontrola technologií</b><span>{{ "osvětlení, čerpadla, filtrace, odpěňovač"|cz }}</span></li>
-        <li><b>Výměna a měření vody</b><span>{{ "parametry vody pod kontrolou"|cz }}</span></li>
-        <li><b>Péče o živočichy</b><span>{{ "zdraví ryb, korálů a rostlin"|cz }}</span></li>
-      </ul>
-      <a class="tl tl--svetle" href="{{ url('servis') }}">O servisu</a>
+<section class="servis4" aria-labelledby="servis-h">
+  <figure class="servis4__foto">{{ img("f/servis-zebrik-2.jpg", alt="Václav Husa při servisu mořského akvária – kontrola techniky pod osvětlením", sizes="100vw") }}</figure>
+  <div class="wrap servis4__in">
+    <h2 id="servis-h" class="servis4__h">Servis</h2>
+    <div class="servis4__text">
+      <p class="servis4__velky">{{ "I to nejkrásnější akvárium potřebuje odbornou péči. Vy si užíváte výsledek, my se staráme o zbytek."|cz }}</p>
+      <p>{{ "Čištění skel, dekorací a techniky · kontrola osvětlení, čerpadel, filtrace a odpěňovače · měření a výměna vody · zdraví ryb, korálů a rostlin."|cz }}</p>
+      <div class="uvod__akce"><a class="tl tl--plne" href="{{ url('servis') }}">O servisu</a><a class="tl tl--svetle" href="#kontakt">Poptat servis</a></div>
     </div>
   </div>
 </section>
 
-<section class="sekce architekti3" id="architekti" aria-labelledby="arch-h">
-  <div class="wrap architekti3__in">
-    <div class="architekti3__text">
-      <span class="stitek">Pro architekty a designéry</span>
-      <h2 id="arch-h">{{ "Akvárium jako architektonický prvek"|cz }}</h2>
-      <p>{{ "Pracujeme v úzké spolupráci s architekty, interiérovými designéry a developery. Už ve fázi návrhu řešíme pohledové osy, proporce, světlo i technické návaznosti na stavbu."|cz }}</p>
-      <p>{{ "Akvárium tak přirozeně zapadá do konceptu interiéru a podporuje jeho charakter – i po letech."|cz }}</p>
+<section class="galerie4" id="architekti" aria-labelledby="arch-h">
+  <div class="wrap galerie4__in">
+    <div class="galerie4__text">
+      <span class="galerie4__pro">Pro architekty a designéry</span>
+      <h2 id="arch-h">{{ "Akvárium jako obraz na zdi"|cz }}</h2>
+      <p>{{ "Spolupracujeme s architekty, interiérovými designéry a developery. Už ve fázi návrhu řešíme pohledové osy, proporce, světlo i technické návaznosti na stavbu – akvárium pak zapadne do konceptu i po letech."|cz }}</p>
       <a class="sipka" href="{{ url('akvaria-na-miru') }}#architekti">Spolupráce s architekty</a>
     </div>
-    <figure class="nadrz architekti3__foto">{{ img("f/bila-stena-sladkovodni.jpg", alt="Sladkovodní akvárium zapuštěné do bílé stěny jako obraz", sizes="(min-width: 900px) 56vw, 100vw") }}</figure>
+    <figure class="galerie4__obraz">
+      {{ img("f/bila-stena-sladkovodni.jpg", alt="Sladkovodní akvárium zapuštěné do bílé stěny jako obraz", sizes="(min-width: 900px) 60vw, 100vw") }}
+      <figcaption><b>Sladkovodní akvárium ve stěně</b><span>{{ "Rostlinné akvárium zapuštěné do stěny v bílém rámu."|cz }}</span></figcaption>
+    </figure>
   </div>
 </section>
 

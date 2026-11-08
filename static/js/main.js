@@ -398,4 +398,64 @@
     });
     spocitej();
   }
+
+  /* Co stavíme: najetí / fokus přepne fotku přes celou obrazovku */
+  var svety = $('[data-svety]');
+  if (svety) {
+    var sv = $$('[data-svet]', svety);
+    var aktivuj = function (li) { sv.forEach(function (x) { x.classList.toggle('je-aktivni', x === li); }); };
+    sv.forEach(function (li) {
+      var a = $('a', li);
+      li.addEventListener('mouseenter', function () { aktivuj(li); });
+      a.addEventListener('focus', function () { aktivuj(li); });
+    });
+  }
+
+  /* Na míru: body na fotce (klik / klávesnice) */
+  $$('.body4 li').forEach(function (li, i, vse) {
+    var b = $('button', li);
+    b.addEventListener('click', function () {
+      var otevrit = !li.classList.contains('je-otevreny');
+      vse.forEach(function (x) { x.classList.remove('je-otevreny'); $('button', x).setAttribute('aria-expanded', 'false'); });
+      if (otevrit) { li.classList.add('je-otevreny'); b.setAttribute('aria-expanded', 'true'); }
+    });
+  });
+
+  /* Jak to probíhá: záložky jako cesta (klik, šipky) */
+  var cesta = $('[data-cesta]');
+  if (cesta) {
+    var tabs = $$('[role="tab"]', cesta);
+    var vyber = function (t, fokus) {
+      tabs.forEach(function (x) {
+        var on = x === t;
+        x.setAttribute('aria-selected', on ? 'true' : 'false');
+        x.tabIndex = on ? 0 : -1;
+        d.getElementById(x.getAttribute('aria-controls')).hidden = !on;
+      });
+      if (fokus) t.focus();
+    };
+    tabs.forEach(function (t, i) {
+      t.addEventListener('click', function () { vyber(t); });
+      t.addEventListener('keydown', function (e) {
+        var k = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+        if (k) { e.preventDefault(); vyber(tabs[(i + k + tabs.length) % tabs.length], true); }
+      });
+    });
+  }
+
+  /* e-shop: nádrže světů – aktivní se rozšíří */
+  var nadrze = document.querySelectorAll('[data-nadrz-p]');
+  if (nadrze.length) {
+    var aktivujN = function (el) {
+      nadrze.forEach(function (n) { n.classList.toggle('je-aktivni', n === el); });
+    };
+    var siroke = window.matchMedia('(min-width: 900px)');
+    nadrze.forEach(function (n) {
+      n.addEventListener('mouseenter', function () { if (siroke.matches) aktivujN(n); });
+      n.addEventListener('focusin', function () { aktivujN(n); });
+      n.addEventListener('click', function (e) {
+        if (siroke.matches && !n.classList.contains('je-aktivni')) { e.preventDefault(); aktivujN(n); }
+      });
+    });
+  }
 })();
